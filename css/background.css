@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/*********************设置背景************************************/
+.item-1 {
+  background: url("../images/bg11.jpg") no-repeat center center;
+  background-size: cover; }
+
+.item-2 {
+  background: url("../images/bg22.jpg") no-repeat center center;
+  background-size: cover; }
+
+.item-3 {
+  background: url("../images/bg33.jpg") no-repeat center center;
+  background-size: cover; }
+
+.item-4 {
+  background: rgba(255, 255, 255, 0.1) !important; }
+
+.item-5 {
+  background: url("../images/bg55.jpg") no-repeat center center;
+  background-size: cover; }
+
+.guns {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  position: fixed;
+  display: none; }
+
+.pure {
+  width: 100%;
+  height: 100%;
+  background: url("../images/bg55.jpg") no-repeat center center;
+  background-size: cover;
+  position: fixed;
+  display: none; }
+
+/**********************设置背景End*****************************************/
