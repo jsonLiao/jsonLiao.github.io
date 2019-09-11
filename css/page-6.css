@@ -20,8 +20,8 @@
 @media (max-width: 768px) {
   .item-6 h1 {
     margin-top: 0; }
-  .word {
+  .item-6 .word {
     padding: 0 15px;
     line-height: 22px; }
-    .word p {
+    .item-6 .word p {
       font-size: 14px; } }

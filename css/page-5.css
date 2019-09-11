@@ -83,3 +83,9 @@
         transform: translateY(0); }
   .portfolio-item:hover .hover-text {
     opacity: 1; }
+
+@media (max-width: 768px) {
+  .portfolio-item {
+    margin-bottom: 4px; }
+  #container-img .row {
+    padding: 0 20px; } }

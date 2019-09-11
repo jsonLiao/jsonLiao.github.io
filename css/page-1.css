@@ -2,12 +2,12 @@
   text-align: center;
   font-size: 50px;
   font-weight: 700;
-  color: #0A9676;
+  color: #fff;
   text-shadow: 5px -2px 8px #151414; }
 
 .item-1 .word > span.hidden-xs,
 .item-1 .word > span.col-xs-12 {
-  color: #B6BF31;
+  color: #222;
   text-shadow: 9px -2px 15px #000; }
 
 .item-1 .motto {
