@@ -1,3 +1,7 @@
+@ ----------------- 生成密钥
+ ssh-keygen -t rsa #
+
+
 1、在github上创建项目
 
 2、使用git clone git@github.com:jsonLiao/jsonLiao.github.io.git 到本地
