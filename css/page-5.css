@@ -86,6 +86,22 @@
 
 @media (max-width: 768px) {
   .portfolio-item {
+    margin-top: 4px;
     margin-bottom: 4px; }
+    .portfolio-item .hover-bg .hover-text a {
+      display: inline-block;
+      width: 90%; }
+    .portfolio-item .hover-bg .hover-text h3 {
+      margin-top: 10px;
+      font-size: 16px; }
+    .portfolio-item .hover-bg .hover-text h4 {
+      font-size: 12px; }
+    .portfolio-item .hover-bg .hover-text small {
+      width: 90%;
+      word-wrap: break-word;
+      font-size: 10px;
+      display: inline-block;
+      margin: 0 auto;
+      white-space: normal; }
   #container-img .row {
-    padding: 0 20px; } }
+    padding: 0 30px; } }

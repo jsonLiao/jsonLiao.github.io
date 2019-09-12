@@ -150,32 +150,31 @@
   border: 2px solid rgba(255, 255, 255, 0.2);
   width: 70px;
   height: 70px;
-  border-radius: 50%; }
-
-.item-1 .next-page,
-.item-1 .next-page:hover,
-.item-1 .next-page:focus {
-  color: yellowgreen; }
-
-.item-1 .next-page {
+  border-radius: 50%;
   line-height: 80px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
   -o-transition: 1s all ease;
   transition: 1s all ease;
-  -webkit-transition: 1s all ease; }
-
-.item-1 .next-page:hover {
-  background: #333333; }
-
-.item-1 .next-page span {
-  font-size: 30px;
-  animation: nextPage 2s linear infinite;
-  -webkit-animation: nextPage 2s linear infinite; }
-
-.item-1 .next-page {
+  -webkit-transition: 1s all ease;
   animation: fadeInUp 2s ease;
   -webkit-animation: fadeInUp 2s ease; }
+  .item-1 .next-page:hover {
+    background: #333333; }
+  .item-1 .next-page .icon {
+    font-size: 14px;
+    color: #fff; }
+  .item-1 .next-page span {
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    animation: nextPage 2s linear infinite;
+    -webkit-animation: nextPage 2s linear infinite; }
+
+.item-1 .next-page,
+.item-1 .next-page:hover,
+.item-1 .next-page:focus {
+  color: yellowgreen; }
 
 .item-1 .inner {
   width: 100%;
@@ -317,44 +316,46 @@
     width: 150px;
     height: 150px; }
 
-#item-4 .thumbnail {
+.item-4 .thumbnail {
   display: block;
   background-color: transparent;
   border: 0;
   margin: 0; }
-  #item-4 .thumbnail .team-img {
+  .item-4 .thumbnail .team-img {
     border: 4px solid transparent;
     -webkit-animation: team-img 3s linear infinite;
     animation: team-img 3s linear infinite; }
-  #item-4 .thumbnail .caption {
-    color: #000000;
-    padding: 9px;
+  .item-4 .thumbnail .caption {
+    color: #000;
     font-family: inherit; }
 
-#item-4 h3 {
+.item-4 h3 {
   font-size: 16px;
   font-weight: 700; }
 
-#item-4 p {
+.item-4 p {
   font-size: 16px;
-  font-weight: 700; }
+  font-weight: 700;
+  color: #666; }
+  .item-4 p.desc {
+    color: #222; }
 
 @media (max-width: 768px) {
-  .fp-tableCell {
-    padding-top: 30px; }
   .item-4 .title {
     font-size: 22px; }
-  #item-4 h3 {
-    font-size: 15px;
-    font-weight: 700; }
-  #item-4 p {
+  .item-4 h3 {
+    margin-top: 10px;
     font-size: 14px;
     font-weight: 700; }
-  #item-4 .thumbnail p {
+  .item-4 .thumbnail p {
     font-size: 13px; }
-  #item-4 .thumbnail .img-circle {
+    .item-4 .thumbnail p.desc {
+      font-size: 12px; }
+  .item-4 .thumbnail .img-circle {
     width: 70%;
-    height: auto; } }
+    height: auto; }
+  .item-4 .thumbnail .caption {
+    padding: 0; } }
 
 .sky {
   height: 480px;
@@ -527,21 +528,37 @@
 
 @media (max-width: 768px) {
   .portfolio-item {
+    margin-top: 4px;
     margin-bottom: 4px; }
+    .portfolio-item .hover-bg .hover-text a {
+      display: inline-block;
+      width: 90%; }
+    .portfolio-item .hover-bg .hover-text h3 {
+      margin-top: 10px;
+      font-size: 16px; }
+    .portfolio-item .hover-bg .hover-text h4 {
+      font-size: 12px; }
+    .portfolio-item .hover-bg .hover-text small {
+      width: 90%;
+      word-wrap: break-word;
+      font-size: 10px;
+      display: inline-block;
+      margin: 0 auto;
+      white-space: normal; }
   #container-img .row {
-    padding: 0 20px; } }
+    padding: 0 30px; } }
 
 .item-6 {
   font-size: 15px; }
   .item-6 .top {
-    background: #16BA9D;
+    background: #f3c717;
     width: 100%;
     height: 50%;
     position: absolute;
     top: 0;
     z-index: 10; }
   .item-6 .foot {
-    background: #16BA9D;
+    background: #f3c717;
     width: 100%;
     height: 50%;
     position: absolute;
@@ -596,6 +613,18 @@
   display: none; }
 
 /**********************设置背景End*****************************************/
+@keyframes logoMove {
+  0% {
+    left: -50px; }
+  100% {
+    left: 200px; } }
+
+@-webkit-keyframes logoMove {
+  0% {
+    left: -50px; }
+  100% {
+    left: 200px; } }
+
 @keyframes nextPage {
   0% {
     top: -55px; }
@@ -712,11 +741,7 @@
 .resume-hide {
   display: none; }
 
-.section.item-1,
-.section.item-2,
-.section.item-3,
-.section.item-4,
-.section.item-6 {
+.section {
   text-align: center;
   font: 50px "Microsoft Yahei";
   color: #fff; }
@@ -730,16 +755,39 @@
   border: none; }
 
 .navbar {
-  background: rgba(68, 68, 68, 0.6);
+  background: none;
   -webkit-transition: 1s all ease;
   -o-transition: 1s all ease;
   transition: 1s all ease; }
+  .navbar.active {
+    background: rgba(0, 0, 0, 0.6); }
 
-.resume .navbar-brand,
-.resume .navbar-brand:visited,
-.resume .navbar-brand:hover {
-  color: #A7E615;
-  font-size: 18px; }
+.resume .navbar-brand {
+  position: relative;
+  display: block;
+  width: 144px;
+  height: 50px;
+  background: url(../images/logo.png) center center no-repeat;
+  background-size: 90%;
+  overflow: hidden; }
+  .resume .navbar-brand::before {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 44px;
+    height: 50px;
+    background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    -ms-transform: skewx(-25deg);
+        transform: skewx(-25deg);
+    -o-transform: skewx(-25deg);
+    -moz-transform: skewx(-25deg);
+    -webkit-transform: skewx(-25deg);
+    -webkit-transition: left 1s ease 0s;
+    -o-transition: left 1s ease 0s;
+    transition: left 1s ease 0s;
+    animation: logoMove 2s linear infinite;
+    -webkit-animation: logoMove 2s linear infinite; }
 
 .resume .navbar-right li a,
 .resume .navbar-right li a:visited {
@@ -751,18 +799,22 @@
   color: #ffffff !important;
   text-decoration: none; }
 
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  background: none; }
+
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:visited,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #ffffff;
-  background-color: #0F698A;
+  background-color: #000;
   text-decoration: none; }
 
 .navbar-default .navbar-toggle {
   background-color: #122b40; }
 
 .navbar-default .navbar-toggle:focus {
-  background-color: #122b40; }
+  background-color: #999; }
 
 .navbar-default .navbar-toggle:hover {
   background-color: #122b40; }

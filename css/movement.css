@@ -1,3 +1,15 @@
+@keyframes logoMove {
+  0% {
+    left: -50px; }
+  100% {
+    left: 200px; } }
+
+@-webkit-keyframes logoMove {
+  0% {
+    left: -50px; }
+  100% {
+    left: 200px; } }
+
 @keyframes nextPage {
   0% {
     top: -55px; }

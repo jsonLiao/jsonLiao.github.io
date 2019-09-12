@@ -22,32 +22,31 @@
   border: 2px solid rgba(255, 255, 255, 0.2);
   width: 70px;
   height: 70px;
-  border-radius: 50%; }
-
-.item-1 .next-page,
-.item-1 .next-page:hover,
-.item-1 .next-page:focus {
-  color: yellowgreen; }
-
-.item-1 .next-page {
+  border-radius: 50%;
   line-height: 80px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
   -o-transition: 1s all ease;
   transition: 1s all ease;
-  -webkit-transition: 1s all ease; }
-
-.item-1 .next-page:hover {
-  background: #333333; }
-
-.item-1 .next-page span {
-  font-size: 30px;
-  animation: nextPage 2s linear infinite;
-  -webkit-animation: nextPage 2s linear infinite; }
-
-.item-1 .next-page {
+  -webkit-transition: 1s all ease;
   animation: fadeInUp 2s ease;
   -webkit-animation: fadeInUp 2s ease; }
+  .item-1 .next-page:hover {
+    background: #333333; }
+  .item-1 .next-page .icon {
+    font-size: 14px;
+    color: #fff; }
+  .item-1 .next-page span {
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    animation: nextPage 2s linear infinite;
+    -webkit-animation: nextPage 2s linear infinite; }
+
+.item-1 .next-page,
+.item-1 .next-page:hover,
+.item-1 .next-page:focus {
+  color: yellowgreen; }
 
 .item-1 .inner {
   width: 100%;
