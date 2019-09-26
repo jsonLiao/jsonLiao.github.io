@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>代码规范</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="../css/doc.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/shCore.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="J_menu" class="sdmenu">
+      <div class="list">
+        <span class="tit">语法</span>
+        <section class="con">
+          <ul>
+            <li>用两个空格来代替制表符（tab） -- 这是唯一能保证在所有环境下获得一致展现的方法。</li>
+            <li>为选择器分组时，将单独的选择器单独放在一行。</li>
+            <li>为了代码的易读性，在每个声明块的左花括号前添加一个空格。</li>
+            <li>声明块的右花括号应当单独成行。</li>
+            <li>每条声明语句的 <code>:</code> 后应该插入一个空格。</li>
+            <li>为了获得更准确的错误报告，每条声明都应该独占一行。</li>
+            <li>所有声明语句都应当以分号结尾。最后一条声明语句后面的分号是可选的，但是，如果省略这个分号，你的代码可能更易出错。</li>
+            <li>对于以逗号分隔的属性值，每个逗号后面都应该插入一个空格（例如，<code>box-shadow</code>）。</li>
+            <li>不要在 <code>rgb()</code>、<code>rgba()</code>、<code>hsl()</code>、<code>hsla()</code> 或 <code>rect()</code> 值的<em>内部</em>的逗号后面插入空格。这样利于从多个属性值（既加逗号也加空格）中区分多个颜色值（只加逗号，不加空格）。</li>
+            <li>对于属性值或颜色参数，省略小于 1 的小数前面的 0 （例如，<code>.5</code> 代替 <code>0.5</code>；<code>-.5px</code> 代替 <code>-0.5px</code>）。</li>
+            <li>十六进制值应该全部小写，例如，<code>#fff</code>。在扫描文档时，小写字符易于分辨，因为他们的形式更易于区分。</li>
+            <li>尽量使用简写形式的十六进制值，例如，用 <code>#fff</code> 代替 <code>#ffffff</code>。</li>
+            <li>为选择器中的属性添加双引号，例如，<code>input[type="text"]</code>。<a href="http://mathiasbynens.be/notes/unquoted-attribute-values#css">只有在某些情况下是可选的</a>，但是，为了代码的一致性，建议都加上双引号。</li>
+            <li>避免为 0 值指定单位，例如，用 <code>margin: 0;</code> 代替 <code>margin: 0px;</code>。</li>
+            <li>统一用中线连接符如：.nav-sub｜.header-tips</li>
+          </ul>
+          <pre class="language-css">
+            /* 不好的写法 CSS */
+            .selector, .selector-secondary, .selector[type=text] {
+              padding:15px;
+              margin:0px 0px 15px;
+              background-color:rgba(0, 0, 0, 0.5);
+              box-shadow:0px 1px 2px #CCC,inset 0 1px 0 #FFFFFF
+            }
+            ul li a span {}
+
+            /* 好的写法 CSS */
+            .selector,
+            .selector-secondary,
+            .selector[type="text"] {
+              padding: 15px;
+              margin-bottom: 15px;
+              background-color: rgba(0,0,0,.5);
+              box-shadow: 0 1px 2px #ccc, inset 0 1px 0 #fff;
+            }
+            /*sass  写法 */
+            $fontSize:      12px;
+            $color:         #333;
+            body{
+                $fontSize: 14px;
+                $color：   #fff !global;
+                font-size:$fontSize;
+                color:$color;
+            }
+            p{
+                font-size:$fontSize;
+                color:$color;
+            }
+          </pre>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">声明顺序</span>
+        <section class="con">
+          <p>
+            相关的属性声明应当归为一组，并按照下面的顺序排列：<br><br> 1、Positioning
+            <br> 2、Box model<br> 3、Typographic
+            <br> 4、Visual
+            <br><br> 由于定位（positioning）可以从正常的文档流中移除元素，并且还能覆盖盒模型（box model）相关的样式，因此排在首位。盒模型排在第二位，因为它决定了组件的尺寸和位置。
+            <br><br> 其他属性只是影响组件的内部（inside）或者是不影响前两组属性，因此排在后面。
+            <br><br>标准的元素属性值顺序如：
+            <pre class="code language-css">
+              .element-control {
+                  position: absolute;
+                  top: 50%;
+                  left: 0px;
+                  float: left;
+                  display: inline-block;
+                  margin-top: 10px;
+                  padding: 10px;
+                  width: 100px;
+                  height: 100px;
+                  border: 3px solid #fff;
+                  -webkit-border-radius: 25px;
+                  -moz-border-radius: 25px;
+                  border-radius: 25px;
+                  background: #000;
+                  line-height: 30px;
+                  font-size: 20px;
+                  font-weight: bold;
+                  color: #fff;
+                  text-align: center;
+                  opacity: 0.8;
+                  filter: alpha(opacity=80);
+              }
+            </pre>
+          </p>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">不要使用 @import</span>
+        <section class="con">
+          <p>与 <code>&lt;link&gt;</code> 标签相比，<code>@import</code> 指令要慢很多，不光增加了额外的请求次数，还会导致不可预料的问题。替代办法有以下几种：</p>
+          <ul>
+            <li>使用多个 <code>&lt;link&gt;</code> 元素</li>
+            <li>通过 Sass 或 Less 类似的 CSS 预处理器将多个 CSS 文件编译为一个文件</li>
+            <li>通过 Rails、Jekyll 或其他系统中提供过 CSS 文件合并功能</li>
+          </ul>
+          <pre class="code language-html">
+            <!-- Use link elements -->
+            &lt;link rel="stylesheet" href="core.css"&gt;
+            <!-- Avoid @imports -->
+            &lt;style>
+              @import url("more.css");
+            &lt;/style&gt;
+         </pre>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">带前缀的属性</span>
+        <section class="con">
+          <p>当使用特定厂商的带有前缀的属性时，通过缩进的方式，让每个属性的值在垂直方向对齐，这样便于多行编辑。</p>
+          <pre class="code language-css">
+            .selector {
+              -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                      box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            }
+          </pre>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">简写形式的属性声明</span>
+        <section class="con">
+          <p>大部分情况下，我们不需要为简写形式的属性声明指定所有值。例如，HTML 的 heading 元素只需要设置上、下边距（margin）的值，因此，在必要的时候，只需覆盖这两个值就可以。过度使用简写形式的属性声明会导致代码混乱，并且会对属性值带来不必要的覆盖从而引起意外的副作用。<br>在需要显示地设置所有值的情况下，应当尽量限制使用简写形式的属性声明。常见的滥用简写属性声明的情况如下：</p>
+          <ul>
+            <li><code>padding</code></li>
+            <li><code>margin</code></li>
+            <li><code>font</code></li>
+            <li><code>background</code></li>
+            <li><code>border</code></li>
+            <li><code>border-radius</code></li>
+          </ul>
+          <pre class="code language-css">
+            /* 不好的写法 example */
+            .element {
+              margin: 0 0 10px;
+              background: red;
+              background: url("image.jpg");
+              border-radius: 3px 3px 0 0;
+            }
+
+            /* 好的写法 example */
+            .element {
+              margin-bottom: 10px;
+              background-color: red;
+              background-image: url("image.jpg");
+              border-top-left-radius: 3px;
+              border-top-right-radius: 3px;
+            }
+          </pre>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">注释</span>
+        <section class="con">
+          <p>代码是由人编写并维护的。请确保你的代码能够自描述、注释良好并且易于他人理解。好的代码注释能够传达上下文关系和代码目的。不要简单地重申组件或 class 名称。<br> 对于较长的注释，务必书写完整的句子；对于一般性注解，可以书写简洁的短语。
+          </p>
+          <h4>文件头部注释</h4>
+          <pre class="code language-css">
+            /*
+             * index.css
+             * Version 20171023
+             * Designed by @yourname
+             */
+          </pre>
+          <h4>行内注释</h4>
+          <pre class="code language-css">
+            /* 不好的 example */
+            /* Modal header */
+            .modal-header {
+              ...
+            }
+
+            /* 好的 example */
+            /* Wrapping element for .modal-title and .modal-close */
+            .modal-header {
+              ...
+            }
+          </pre>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">class 命名</span>
+        <section class="con">
+          <ul>
+            <li>class 名称中只能出现小写字符和破折号（dashe）（不是下划线，也不是驼峰命名法）。破折号应当用于相关 class 的命名（类似于命名空间）（例如，<code>.btn</code> 和 <code>.btn-danger</code>）。</li>
+            <li>避免过度任意的简写。<code>.btn</code> 代表 <em>button</em>，但是 <code>.s</code> 不能表达任何意思。</li>
+            <li>class 名称应当尽可能短，并且意义明确。</li>
+            <li>使用有意义的名称。使用有组织的或目的明确的名称，不要使用表现形式（presentational）的名称。</li>
+            <li>基于最近的父 class 或基本（base） class 作为新 class 的前缀。</li>
+            <li>使用 <code>.js-*</code> class 来标识行为（与样式相对），并且不要将这些 class 包含到 CSS 文件中。</li>
+          </ul>
+          <pre class="code language-css">
+            /* 不好的 example */
+            .t { ... }
+            .red { ... }
+            .header { ... }
+
+            /* 好的 example */
+            .inter { ... }
+            .inter-header { ... }
+          </pre>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">选择器</span>
+        <section class="con">
+          <ul>
+            <li>对于通用元素使用 class ，这样利于渲染性能的优化。</li>
+            <li>对于经常出现的组件，避免使用属性选择器（例如，<code>[class^="..."]</code>）。浏览器的性能会受到这些因素的影响。</li>
+            <li>选择器要尽可能短，并且尽量限制组成选择器的元素个数，建议不要超过 3 。</li>
+            <li><strong>只有</strong>在必要的时候才将 class 限制在最近的父元素内（也就是后代选择器）（例如，不使用带前缀的 class 时 -- 前缀类似于命名空间）。</li>
+          </ul>
+          <pre class="code language-css">
+            /* 不好的 example */
+            span { ... }
+            .page-container #stream .stream-item .inter .inter-header .username { ... }
+            .avatar { ... }
+
+            /* 好的 example */
+            .avatar { ... }
+            .inter-header .username { ... }
+            .inter .avatar { ... }
+          </pre>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">代码组织</span>
+        <section class="con">
+          <ul>
+            <li>以组件为单位组织代码段。</li>
+            <li>制定一致的注释规范。</li>
+            <li>使用一致的空白符将代码分隔成块，这样利于扫描较大的文档。</li>
+            <li>如果使用了多个 CSS 文件，将其按照组件而非页面的形式分拆，因为页面会被重组，而组件只会被移动。</li>
+          </ul>
+          <pre class="code language-css">
+            /*
+             * Component section heading
+             */
+
+            .element { ... }
+
+
+            /*
+             * Component section heading
+             *
+             * Sometimes you need to include optional context for the entire component. Do that up here if it's important enough.
+             */
+
+            .element { ... }
+
+            /* Contextual sub-component or modifer */
+            .element-heading { ... }
+          </pre>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">编辑器配置</span>
+        <section class="con">
+          <p>将你的编辑器按照下面的配置进行设置，以避免常见的代码不一致和差异：</p>
+          <ul>
+            <li>用两个空格代替制表符（soft-tab 即用空格代表 tab 符）。</li>
+            <li>保存文件时，删除尾部的空白符。</li>
+            <li>设置文件编码为 UTF-8。</li>
+            <li>在文件结尾添加一个空白行。</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">统一命名</span>
+        <section class="con">
+          <table>
+             <caption>布局（.g-）</caption>
+             <thead>
+                 <tr><th>语义</th><th>命名</th></tr>
+             </thead>
+             <tbody>
+                 <tr><td>文档</td><td>doc</td></tr>
+                 <tr><td>头部</td><td>head</td></tr>
+                 <tr><td>主体</td><td>body</td></tr>
+                 <tr><td>尾部</td><td>foot</td></tr>
+                 <tr><td>主栏</td><td>main</td></tr>
+                 <tr><td>主栏子容器</td><td>mainc</td></tr>
+                 <tr><td>侧栏</td><td>side</td></tr>
+                 <tr><td>侧栏子容器</td><td>sidec</td></tr>
+                 <tr><td>盒容器</td><td>wrap/box</td></tr>
+             </tbody>
+         </table>
+         <table class="mt10">
+              <caption>模块（.m-）、元件（.u-）</caption>
+              <thead>
+                  <tr><th>语义</th><th>命名</th><th>简写</th></tr>
+              </thead>
+              <tbody>
+                  <tr><td>导航</td><td>nav</td><td>nav</td></tr>
+                  <tr><td>子导航</td><td>subnav</td><td>snav</td></tr>
+                  <tr><td>面包屑</td><td>crumb</td><td>crm</td></tr>
+                  <tr><td>菜单</td><td>menu</td><td>menu</td></tr>
+                  <tr><td>选项卡</td><td>tab</td><td>tab</td></tr>
+                  <tr><td>标题区</td><td>head/title</td><td>hd/tt</td></tr>
+                  <tr><td>内容区</td><td>body/content</td><td>bd/ct</td></tr>
+                  <tr><td>列表</td><td>list</td><td>lst</td></tr>
+                  <tr><td>表格</td><td>table</td><td>tb</td></tr>
+                  <tr><td>表单</td><td>form</td><td>fm</td></tr>
+                  <tr><td>热点</td><td>hot</td><td>hot</td></tr>
+                  <tr><td>排行</td><td>top</td><td>top</td></tr>
+                  <tr><td>登录</td><td>login</td><td>log</td></tr>
+                  <tr><td>标志</td><td>logo</td><td>logo</td></tr>
+                  <tr><td>广告</td><td>advertise</td><td>ad</td></tr>
+                  <tr><td>搜索</td><td>search</td><td>sch</td></tr>
+                  <tr><td>幻灯</td><td>slide</td><td>sld</td></tr>
+                  <tr><td>提示</td><td>tips</td><td>tips</td></tr>
+                  <tr><td>帮助</td><td>help</td><td>help</td></tr>
+                  <tr><td>新闻</td><td>news</td><td>news</td></tr>
+                  <tr><td>下载</td><td>download</td><td>dld</td></tr>
+                  <tr><td>注册</td><td>regist</td><td>reg</td></tr>
+                  <tr><td>投票</td><td>vote</td><td>vote</td></tr>
+                  <tr><td>版权</td><td>copyright</td><td>cprt</td></tr>
+                  <tr><td>结果</td><td>result</td><td>rst</td></tr>
+                  <tr><td>标题</td><td>title</td><td>tt</td></tr>
+                  <tr><td>按钮</td><td>button</td><td>btn</td></tr>
+                  <tr><td>输入</td><td>input</td><td>ipt</td></tr>
+              </tbody>
+          </table>
+          <table class="mt10">
+              <caption>功能（.f-）</caption>
+              <thead>
+                  <tr><th>语义</th><th>命名</th><th>简写</th></tr>
+              </thead>
+              <tbody>
+                  <tr><td>浮动清除</td><td>clearboth</td><td>fn-cb</td></tr>
+                  <tr><td>向左浮动</td><td>floatleft</td><td>fn-fl</td></tr>
+                  <tr><td>向右浮动</td><td>floatright</td><td>fn-fr</td></tr>
+                  <tr><td>文本居中</td><td>textaligncenter</td><td>fn-tc</td></tr>
+                  <tr><td>文本居右</td><td>textalignright</td><td>fn-tr</td></tr>
+                  <tr><td>文本居左</td><td>textalignleft</td><td>fn-tl</td></tr>
+                  <tr><td>垂直居中</td><td>verticalalignmiddle</td><td>fn-vam</td></tr>
+                  <tr><td>溢出隐藏</td><td>overflowhidden</td><td>fn-oh</td></tr>
+                  <tr><td>完全消失</td><td>displaynone</td><td>fn-dn</td></tr>
+                  <tr><td>完全显示</td><td>displaynone</td><td>fn-db</td></tr>
+                  <tr><td>内联块级</td><td>inlineblock</td><td>fn-ib</td></tr>
+                  <tr><td>字体大小</td><td>fontsize</td><td>fn-fs</td></tr>
+                  <tr><td>字体粗细</td><td>fontweight</td><td>fn-fw</td></tr>
+              </tbody>
+          </table>
+          <table class="mt10">
+              <caption>皮肤（.s-）</caption>
+              <thead>
+                  <tr><th>语义</th><th>命名</th><th>简写</th></tr>
+              </thead>
+              <tbody>
+                  <tr><td>字体颜色</td><td>fontcolor</td><td>fc</td></tr>
+                  <tr><td>背景</td><td>background</td><td>bg</td></tr>
+                  <tr><td>背景颜色</td><td>backgroundcolor</td><td>bgc</td></tr>
+                  <tr><td>背景图片</td><td>backgroundimage</td><td>bgi</td></tr>
+                  <tr><td>背景定位</td><td>backgroundposition</td><td>bgp</td></tr>
+                  <tr><td>边框颜色</td><td>bordercolor</td><td>bdc</td></tr>
+              </tbody>
+          </table>
+          <table class="mt10">
+              <caption>状态（.z-）</caption>
+              <thead>
+                  <tr><th>语义</th><th>命名</th><th>简写</th></tr>
+              </thead>
+              <tbody>
+                  <tr><td>选中</td><td>selected</td><td>sel</td></tr>
+                  <tr><td>当前</td><td>current</td><td>crt</td></tr>
+                  <tr><td>显示</td><td>show</td><td>show</td></tr>
+                  <tr><td>隐藏</td><td>hide</td><td>hide</td></tr>
+                  <tr><td>打开</td><td>open</td><td>open</td></tr>
+                  <tr><td>关闭</td><td>close</td><td>close</td></tr>
+                  <tr><td>出错</td><td>error</td><td>err</td></tr>
+                  <tr><td>不可用</td><td>disabled</td><td>dis</td></tr>
+              </tbody>
+          </table>
+        </section>
+      </div>
+
+
+      <div class="list">
+        <span class="tit">Hack</span>
+        <section class="con">
+          <pre class="code language-css">
+/* 针对ie的hack */
+selector {
+   property: value;     /* 所有浏览器 */
+   property: value\9;   /* 所有IE浏览器 */
+   property: value\0;   /* IE8 */
+   +property: value;    /* IE7 */
+   _property: value;    /* IE6 */
+   *property: value;    /* IE6-7 */
+}
+          </pre>
+        </section>
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/libs/jquery.syntaxhighlighter.js"></script>
+  <script src="../js/libs/sdmenu.js"></script>
+  <script>
+    window.onload = function() {
+      jMenu = new SDMenu("J_menu");
+      jMenu.init();
+    }
+    $(function() {
+      $.SyntaxHighlighter.init();
+    })
+  </script>
+</body>
+
+</html>

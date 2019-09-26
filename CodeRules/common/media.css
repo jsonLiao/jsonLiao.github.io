@@ -1,0 +1,41 @@
+@charset "UTF-8";
+/* media */
+/* 横屏 */
+@media screen and (orientation:landscape){
+}
+/* 竖屏 */
+@media screen and (orientation:portrait){
+}
+@media only screen and (max-width:768px) {
+html { font-size: 204.8px }
+}
+@media only screen and (max-width:640px) {
+	html { font-size: 170.66667px }
+}
+@media only screen and (max-width:480px) {
+	html { font-size: 128px }
+}
+@media only screen and (max-width:414px) {
+	html { font-size: 110.4px }
+}
+@media only screen and (max-width:412px) {
+	html { font-size: 109.86667px }
+}
+@media only screen and (max-width:400px) {
+	html { font-size: 106.66667px }
+}
+@media only screen and (max-width:393px) {
+	html { font-size: 104.8px }
+}
+@media only screen and (max-width:375px) {
+	html { font-size: 100px }
+}
+@media only screen and (max-width:360px) {
+	html { font-size: 96px }
+}
+@media only screen and (max-width:345px) {
+	html { font-size: 92px }
+}
+@media only screen and (max-width:320px) {
+	html { font-size: 85.33333px }
+}

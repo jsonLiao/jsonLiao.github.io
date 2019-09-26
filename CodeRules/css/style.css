@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2016-05-06 13:43:23
+ * @version $Id$
+ */
+* {
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: "微软雅黑";
+}
+h1 {
+	text-align: center;
+	padding: 40px 0;
+	font-size: 18px;
+}
+.demo {
+	margin: 20px 60px;
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+}
+.item {
+	margin: 0 60px 20px 60px;
+}
+.box {
+	background: #f9fafe;
+	border: 1px solid #ccc;
+	margin: 0 60px 20px 60px;
+}
+.box2{
+	border: none;
+}
+code, pre {
+	font-family: "PT Mono", Menlo, "Courier New", monospace;
+	font-size: 95%;
+	margin: ;
+}
+code {
+	padding: 2px 4px;
+	font-size: 85%;
+	color: #d44950;
+	background-color: #f7f7f9;
+	border-radius: .2rem;
+}
+pre {
+	display: block;
+	line-height: 1.4;
+	white-space: pre;
+	white-space: pre-wrap;
+}
+pre code {
+	padding: 0;
+	color: inherit;
+	background-color: transparent;
+	border: 0;
+}
+.h50{
+	height: 50px;
+}

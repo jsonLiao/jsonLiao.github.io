@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+/**
+ * 
+ * @authors lxb
+ * @date    2016-04-18 09:45:44
+ * @version v1
+ */
+.popPage { width: 100%; height: 100%; position: fixed; background:rgba(0,0,0,.5); left: 0px; top: 0px; z-index: 9990; display: block; _position: absolute; _top: expression(eval(document.documentElement.scrollTop)); filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#66000000',EndColorStr='#66000000');}
+.popBox { top: 50%; left: 50%; margin: 0; padding: 0; background-color: #fff; -webkit-background-clip: content; box-shadow: 1px 1px 50px rgba(0, 0, 0, .3); width: 260px; min-height: 150px; position: fixed; margin: -75px 0 0 -130px; z-index: 10000;}
+
+/* common */
+.popBox-shade { top: 0; left: 0; width: 100%; height: 100%; _height: expression(document.body.offsetHeight+"px"); }
+.popBox-close { position: absolute; }
+.popBox-content { position: relative; }
+.popBox-border { border: 1px solid #B2B2B2; border: 1px solid rgba(0, 0, 0, .3); box-shadow: 1px 1px 5px rgba(0, 0, 0, .2); }
+.popBox-ico { background: url(../images/icon.png) no-repeat; }
+.popBox-dialog .popBox-ico, .popBox-setwin a, .popBox-btn a { display: inline-block; *display: inline; *zoom: 1; vertical-align: top; }
+.popBox-title { padding: 0 80px 0 20px; height: 42px; line-height: 42px; border-bottom: 1px solid #eee; font-size: 14px; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background-color: #F8F8F8; border-radius: 2px 2px 0 0; }
+.popBox-setwin { position: absolute; right: 15px; *right: 0; top: 15px; font-size: 0; line-height: initial; }
+.popBox-setwin a { position: relative; width: 16px; height: 16px; margin-left: 10px; font-size: 12px; _overflow: hidden; }
+.popBox-setwin .popBox-close { background-position: 0 -40px; cursor: pointer; }
+.popBox-setwin .popBox-close:hover { opacity: 0.7; }
+.popBox-content { position: relative; padding: 20px; line-height: 24px; word-break: break-all; overflow: hidden; font-size: 14px; overflow: auto; }
+
+/* 按钮栏 */
+.popBox-btn { text-align: right; padding: 0 10px 12px; pointer-events: auto; }
+.popBox-btn a { height: 28px; line-height: 28px; border-radius: 5px; border: 1px solid #ccc; margin: 0 6px; padding: 0 15px; background-color: #f1f1f1; color: #333; font-weight: 400; cursor: pointer; text-decoration: none; font-size: 12px;}
+.popBox-btn a:hover { opacity: 0.9; text-decoration: none; }
+.popBox-btn a:active { opacity: 0.7; }
+.popBox-btn .popBox-btn0 { border-color: #ccc; background-color: #fd5e89; color: #fff; }
+.popBox-btn .popBox-btn1 { border-color: #ccc; background-color: #fff; color: #333; }
+
+.popBoxSimple{
+	display: none;
+	min-width: 200px;
+	background: #fff;
+	max-width: 840px;
+	max-height: 700px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	z-index: 99999;
+	-webkit-background-clip: content; box-shadow: 1px 1px 50px rgba(0, 0, 0, .3); 
+}
+.popBoxSimple .inner{
+	margin: 20px;
+	overflow: hidden;
+}
+
+/* 动画 */
+.pop-layer { border-radius: 2px; -webkit-animation-fill-mode: both; animation-fill-mode: both; -webkit-animation-duration: .3s; animation-duration: .3s; }
+@-webkit-keyframes bounceIn {
+	0% { opacity: 0; -webkit-transform: scale(.5); transform: scale(.5) }
+	100% { opacity: 1; -webkit-transform: scale(1); transform: scale(1) }
+}
+@keyframes bounceIn {
+	0% { opacity: 0; -webkit-transform: scale(.5); -ms-transform: scale(.5); transform: scale(.5) }
+	100% { opacity: 1; -webkit-transform: scale(1); -ms-transform: scale(1); transform: scale(1) }
+}
+.pop-anim { -webkit-animation-name: bounceIn; animation-name: bounceIn }
+@-webkit-keyframes bounceOut {
+	100% { opacity: 0; -webkit-transform: scale(.7); transform: scale(.7) }
+	30% { -webkit-transform: scale(1.03); transform: scale(1.03) }
+	0% { -webkit-transform: scale(1); transform: scale(1); }
+}
+@keyframes bounceOut {
+	100% { opacity: 0; -webkit-transform: scale(.7); -ms-transform: scale(.7); transform: scale(.7) }
+	30% { -webkit-transform: scale(1.03); -ms-transform: scale(1.03); transform: scale(1.03) }
+	0% { -webkit-transform: scale(1); -ms-transform: scale(1); transform: scale(1) }
+}
+.pop-anim-close { -webkit-animation-name: bounceOut; animation-name: bounceOut; -webkit-animation-duration: .2s; animation-duration: .2s; }

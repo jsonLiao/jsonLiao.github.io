@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>代码规范</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="../css/doc.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="J_menu" class="sdmenu">
+
+      <div class="list">
+        <span class="tit">开发准备</span>
+        <section class="con">
+          <h4 class="mb10">了解产品和设计</h4>
+          <ul class="mb20">
+            <li>参加需求评审会议，了解产品需求设计和项目成员。</li>
+            <li>了解产品面向的设备和平台。</li>
+            <li>了解产品对兼容性的要求以及是否采用响应式设计等。</li>
+            <li>了解产品要使用的技术难度及面向的范围.</li>
+          </ul>
+          <h4 class="mb10">提出疑问和见解</h4>
+          <ul class="mb20">
+            <li>在需求评审会议中结合技术要求，提出疑问和见解。</li>
+            <li>提出可能存在的问题（技术实现问题、性能问题等），协商解决方案并达成共识。</li>
+            <li>提出已有新技术可能在产品中的应用场景，协助产品创新。</li>
+          </ul>
+          <h4 class="mb10">预算人力和时间</h4>
+          <ul class="mb20">
+            <li>根据项目时间要求及工作量，预算人力和时间。</li>
+            <li>预算开发周期和阶段性产出。</li>
+            <li>根据预算制定相应的开发周期表。</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">开发过程</span>
+        <section class="con">
+          <h4 class="mb10">职责任务</h4>
+          <ul class="mb20">
+            <li>确定一个项目工程师负责人，他将负责对整个页面开发工作做统筹规划、分配协调等管理工作和主开发职责。</li>
+            <li>确认交互原型或视觉效果已经定稿，再开始开发工作。</li>
+            <li>如果采取并行模式（视觉设计和页面开发同时进行），则以交互原型定稿为准（当视觉效果定稿后，页面工程师再补充细节），开始分配。</li>
+            <li>按页面类型分配，同一类型页面分配给同一个人。</li>
+            <li>每个人都要了解页面公共元素（多个页面中相同或相似部分），一个公共元素只分配到一个人，每人完成自身页面的同时完成“提取剥离”，你可能需要了解<a href="/standard/css-sort.html">“分类方法规范”</a>。</li>
+            <li>由于图片无法使用SVN合并和解决冲突，<a href="/standard/css-optimize.html">切图</a>需要统筹分配。</li>
+            <li>在项目管理平台中创建细分的开发任务，填写任务详情和时间，如果任务间存在关系，则设置好关联或从属关系。</li>
+          </ul>
+          <h4 class="mb10">页面开发</h4>
+          <ul class="mb20">
+            <li>创建前端目录，包含“页面开发”目录（如:js、css、html、img）及“提取剥离”目录（如：demo）。</li>
+            <li>创建前端文件，如：css/*.css、html/*.html、demo/grid.html、demo/module.html、demo/unit.html。</li>
+            <li>抽离公共代码块,创建一个公共代码块的demo页面</li>
+            <li>使用合理的插件，高效开发页面。</li>
+            <li>和交互、视觉及其他前端工程师或后端工程师保持良好的沟通。</li>
+            <li>及时反馈问题和建议：对效果疑问的确认、对状态缺失的补充、对优雅退化的建议、对行为结构的说明等等。</li>
+            <li>针对页面的js交互效果，如有疑问及时抽出沟通。</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="list">
+        <span class="tit">开发产出</span>
+        <section class="con">
+          <h4 class="mb10">代码自测</h4>
+          <ul class="mb20">
+            <li>更新、合并、解决冲突、提交。</li>
+            <li>对自己的代码进行全面的多设备测试和兼容性测试。</li>
+            <li>如果自测过程中发现别人写的代码有问题，及时反馈。</li>
+          </ul>
+          <h4 class="mb10">提交验收</h4>
+          <ul class="mb20">
+            <li>当有阶段性产出后，前端工程师将页面提交给设计师，进行效果验收。</li>
+            <li>效果验收将主要检查视觉效果符合度（尺寸、位置、颜色、切图等）。</li>
+          </ul>
+          <h4 class="mb10">交接说明</h4>
+          <ul class="mb20">
+            <li>当完成验收后，通知并交给后端开发工程师，进行后续开发，前端工程师需要交代可能需要他们注意的地方或者对代码的解释说明。</li>
+          </ul>
+          <h4 class="mb10">总结分享</h4>
+          <ul class="mb20">
+            <li>分享内容可以包含：架构思想、协作心得、设备特性介绍、新技术应用、调研展示、遇到的问题和解决方案等。</li>
+            <li>分享对象不限于：设计、前端、后端及所有感兴趣的人。</li>
+          </ul>
+          <h4 class="mb10">变更维护</h4>
+          <ul class="mb20">
+            <li>如果未经过需求变更和设计变更，原则上不允许直接进行开发变更。</li>
+            <li>变更前应了解变更原因，变更后应该及时通知后续开发工程师。</li>
+          </ul>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../js/libs/sdmenu.js"></script>
+  <script>
+    window.onload = function() {
+      jMenu = new SDMenu("J_menu");
+      jMenu.init();
+    }
+  </script>
+</body>
+
+</html>
