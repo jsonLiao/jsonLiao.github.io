@@ -847,7 +847,7 @@
           </pre>
 
 
-          <h3 class="heading" data-id="heading-20">Class</h3>
+          <h3 class="title">Class</h3>
           <ul>
             <li>定义：对一类具有共同特征的事物的抽象(<font color="#f66">构造函数语法糖</font>)</li>
             <li>原理：类本身指向构造函数，所有方法定义在<code>prototype</code>上，可看作构造函数的另一种写法(<code>Class ===
@@ -1002,7 +1002,7 @@
 
 
 
-          <h3 class="heading" data-id="heading-21">Module</h3>
+          <h3 class="title">Module</h3>
           <ul>
             <li>命令
               <ul>
@@ -1217,7 +1217,7 @@
           </pre>
 
 
-          <h3 class="heading" data-id="heading-22">Iterator</h3>
+          <h3 class="title">Iterator</h3>
           <ul>
             <li>定义：为各种不同的数据结构提供统一的访问机制</li>
             <li>原理：创建一个指针指向首个成员，按照次序使用<code>next()</code>指向下一个成员，直接到结束位置(数据结构只要部署<code>Iterator接口</code>就可完成遍历操作)</li>
@@ -1289,7 +1289,7 @@
           </ul>
 
 
-          <h3 class="heading" data-id="heading-23">Promise</h3>
+          <h3 class="title">Promise</h3>
           <ul>
             <li>定义：包含异步操作结果的对象</li>
             <li>状态
@@ -1378,7 +1378,7 @@
             </li>
             <li><code>Promise.reject()</code>的参数会原封不动地作为<code>rejected</code>的理由，变成后续方法的参数</li>
           </ul>
-          <h3 class="heading" data-id="heading-24">Generator</h3>
+          <h3 class="title">Generator</h3>
           <ul>
             <li>定义：封装多个内部状态的异步编程解决方案</li>
             <li>形式：调用<code>Generator函数</code>(该函数不执行)返回指向内部状态的指针对象(不是运行结果)</li>
@@ -1492,12 +1492,12 @@
       <div class="list">
         <span class="tit">ES2016</span>
         <section class="con">
-          <h3 class="heading" data-id="heading-26">数值扩展</h3>
+          <h3 class="title">数值扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>指数运算符(**)</strong>：数值求幂(相当于<code>Math.pow()</code>)</li>
           </ul>
-          <h3 class="heading" data-id="heading-27">数组扩展</h3>
+          <h3 class="title">数组扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>includes()</strong>：是否存在指定成员</li>
@@ -1508,20 +1508,20 @@
       <div class="list">
         <span class="tit">ES2017</span>
         <section class="con">
-          <h3 class="heading" data-id="heading-29">声明</h3>
+          <h3 class="title">声明</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>共享内存和原子操作</strong>：由全局对象<code>SharedArrayBuffer</code>和<code>Atomics</code>实现，将数据存储在一块共享内存空间中，这些数据可在<code>JS主线程</code>和<code>web-worker线程</code>之间共享
             </li>
           </ul>
-          <h3 class="heading" data-id="heading-30">字符串扩展</h3>
+          <h3 class="title">字符串扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>padStart()</strong>：把指定字符串填充到字符串头部，返回新字符串</li>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>padEnd()</strong>：把指定字符串填充到字符串尾部，返回新字符串</li>
           </ul>
-          <h3 class="heading" data-id="heading-31">对象扩展</h3>
+          <h3 class="title">对象扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>Object.getOwnPropertyDescriptors()</strong>：返回对象所有自身属性(非继承属性)的描述对象</li>
@@ -1530,12 +1530,12 @@
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>Object.entries()</strong>：返回以键和值组成的数组</li>
           </ul>
-          <h3 class="heading" data-id="heading-32">函数扩展</h3>
+          <h3 class="title">函数扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>函数参数尾逗号</strong>：允许函数最后一个参数有尾逗号</li>
           </ul>
-          <h3 class="heading" data-id="heading-33">Async</h3>
+          <h3 class="title">Async</h3>
           <ul>
             <li>定义：使异步函数以同步函数的形式书写(<font color="#f66">Generator函数语法糖</font>)</li>
             <li>原理：将<code>Generator函数</code>和自动执行器<code>spawn</code>包装在一个函数里</li>
@@ -1604,12 +1604,12 @@
       <div class="list">
         <span class="tit">ES2018</span>
         <section class="con">
-          <h3 class="heading" data-id="heading-35">字符串扩展</h3>
+          <h3 class="title">字符串扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>放松对标签模板里字符串转义的限制</strong>：遇到不合法的字符串转义返回<code>undefined</code>，并且从<code>raw</code>上可获取原字符串</li>
           </ul>
-          <h3 class="heading" data-id="heading-36">对象扩展</h3>
+          <h3 class="title">对象扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>扩展运算符(...)</strong>：转换对象为用逗号分隔的参数序列(<code>{ ...obj }</code>，相当于<code>rest/spread参数</code>的逆运算)
@@ -1626,7 +1626,7 @@
             <li>与对象解构赋值结合：<code>const { x, ...rest/spread } = { x: 1, y: 2, z: 3 }</code>(不能复制继承自原型对象的属性)</li>
             <li>修改现有对象部分属性：<code>const obj = { x: 1, ...{ x: 2 } }</code></li>
           </ul>
-          <h3 class="heading" data-id="heading-37">正则扩展</h3>
+          <h3 class="title">正则扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>s修饰符</strong>：dotAll模式修饰符，使<code>.</code>匹配任意单个字符(<code>dotAll模式</code>)</li>
@@ -1658,12 +1658,12 @@
               </ul>
             </li>
           </ul>
-          <h3 class="heading" data-id="heading-38">Promise</h3>
+          <h3 class="title">Promise</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>finally()</strong>：指定不管最后状态如何都会执行的回调函数</li>
           </ul>
-          <h3 class="heading" data-id="heading-39">Async</h3>
+          <h3 class="title">Async</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>异步迭代器(for-wait-of)</strong>：，循环等待每个<code>Promise对象</code>变为<code>resolved状态</code>才进入下一步</li>
@@ -1674,7 +1674,7 @@
       <div class="list">
         <span class="tit">ES2019</span>
         <section class="con">
-          <h3 class="heading" data-id="heading-41">字符串扩展</h3>
+          <h3 class="title">字符串扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>直接输入U+2028和U+2029</strong>：字符串可直接输入<code>行分隔符</code>和<code>段分隔符</code></li>
@@ -1685,26 +1685,26 @@
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>trimEnd()</strong>：消除字符串尾部空格，返回新字符串</li>
           </ul>
-          <h3 class="heading" data-id="heading-42">对象扩展</h3>
+          <h3 class="title">对象扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>Object.fromEntries()</strong>：返回以键和值组成的对象(<code>Object.entries()</code>的逆操作)</li>
           </ul>
-          <h3 class="heading" data-id="heading-43">数组扩展</h3>
+          <h3 class="title">数组扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>flat()</strong>：扁平化数组，返回新数组</li>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>flatMap()</strong>：映射且扁平化数组，返回新数组(只能展开一层数组)</li>
           </ul>
-          <h3 class="heading" data-id="heading-44">函数扩展</h3>
+          <h3 class="title">函数扩展</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>toString()改造</strong>：返回函数原始代码(与编码一致)</li>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>catch()参数可省略</strong>：<code>catch()</code>中的参数可省略</li>
           </ul>
-          <h3 class="heading" data-id="heading-45">Symbol</h3>
+          <h3 class="title">Symbol</h3>
           <ul>
             <li class="task-list-item"><input checked="" disabled="" type="checkbox">
               <strong>description</strong>：返回<code>Symbol值</code>的描述</li>
