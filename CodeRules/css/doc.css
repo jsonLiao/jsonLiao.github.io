@@ -2,12 +2,24 @@
 * reset
 */
 
-html, body, div, p, ul, ol, li, h1, h2, h3, h4, h5 {
+html,
+body,
+div,
+p,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5 {
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -18,17 +30,17 @@ body {
   font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
 }
 
-ul, ol {
-  list-style: none;
-}
-
 a {
   cursor: pointer;
   text-decoration: none;
   color: #212121;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: #212121;
   font-size: 16px;
 }
@@ -125,7 +137,8 @@ body .table-doc {
   background-color: #fff;
 }
 
-body .table-doc th, body .table-doc td {
+body .table-doc th,
+body .table-doc td {
   padding: 20px;
   border: 1px #e5e9f2 solid;
   word-break: break-all;
@@ -165,7 +178,8 @@ body .example-links {
   background-color: #fff !important;
 }
 
-.syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
+.syntaxhighlighter .line.highlighted.alt1,
+.syntaxhighlighter .line.highlighted.alt2 {
   background-color: #fff !important;
 }
 
@@ -226,15 +240,18 @@ body .example-links {
   color: #ffe862 !important;
 }
 
-.syntaxhighlighter .plain, .syntaxhighlighter .plain a {
+.syntaxhighlighter .plain,
+.syntaxhighlighter .plain a {
   color: #333 !important;
 }
 
-.syntaxhighlighter .comments, .syntaxhighlighter .comments a {
+.syntaxhighlighter .comments,
+.syntaxhighlighter .comments a {
   color: #336442 !important;
 }
 
-.syntaxhighlighter .string, .syntaxhighlighter .string a {
+.syntaxhighlighter .string,
+.syntaxhighlighter .string a {
   color: #67b682 !important;
 }
 
@@ -267,15 +284,18 @@ body .example-links {
   background-color: none !important;
 }
 
-.syntaxhighlighter .color1, .syntaxhighlighter .color1 a {
+.syntaxhighlighter .color1,
+.syntaxhighlighter .color1 a {
   color: #e60012 !important;
 }
 
-.syntaxhighlighter .color2, .syntaxhighlighter .color2 a {
+.syntaxhighlighter .color2,
+.syntaxhighlighter .color2 a {
   color: #91bb9e !important;
 }
 
-.syntaxhighlighter .color3, .syntaxhighlighter .color3 a {
+.syntaxhighlighter .color3,
+.syntaxhighlighter .color3 a {
   color: #edef7d !important;
 }
 
@@ -329,7 +349,6 @@ body .example-links {
 }
 
 .sdmenu ul {
-  list-style-type: disc;
   margin-left: 30px;
 }
 
@@ -339,7 +358,8 @@ body .example-links {
   line-height: 36px;
 }
 
-.sdmenu .tit::after, .sdmenu .list .tit::after {
+.sdmenu .tit::after,
+.sdmenu .list .tit::after {
   content: '';
   position: absolute;
   top: 0;
@@ -395,7 +415,8 @@ table {
   text-align: left;
 }
 
-.sdmenu th, .sdmenu td {
+.sdmenu th,
+.sdmenu td {
   padding: 0.6em 1em;
   border: 1px solid #e1e1e8;
   vertical-align: top;
@@ -407,22 +428,78 @@ table {
   background: #f7f7f7;
 }
 
-.demo-lists ul{
+.demo-lists ul {
   width: 100%;
   overflow: hidden;
 }
-.demo-lists li{
- width: 180px;
- height: 180px;
- float: left;
- border: 1px solid #ccc;
- text-align: center;
+
+.demo-lists li {
+  width: 180px;
+  height: 180px;
+  float: left;
+  border: 1px solid #ccc;
+  text-align: center;
 }
-.demo-lists li .pic{
+
+.demo-lists li .pic {
   height: 150px;
 }
-.demo-lists li h5{
+
+.demo-lists li h5 {
   line-height: 30px;
   font-size: 14px;
   font-weight: normal;
+}
+
+.article-content h3 {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-bottom: 0;
+}
+
+.article-content blockquote {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  color: #666;
+  padding: 1px 23px;
+  margin: 22px 0;
+  border-left: 4px solid #cbcbcb;
+  background-color: #f8f8f8;
+}
+
+.article-content blockquote p {
+  background: none;
+  padding: 0;
+}
+
+.article-content code {
+  background-color: #fff5f5;
+  color: #fb3180;
+  padding: 0 5px;
+}
+
+.article-content ol li,
+.article-content ul li {
+  list-style: inherit;
+}
+
+.article-content pre>code {
+  display: block;
+  padding: 18px 15px 12px;
+  background: #f9f9f9;
+  color: #666;
+}
+
+.article-content pre>code span {
+  font-weight: bold;
+  font-size: 18px;
+  color: #202020;
 }
