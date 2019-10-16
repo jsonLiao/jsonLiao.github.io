@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>三栏布局-双飞翼布局</title>
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    .left {
+      background: red;
+    }
+
+    .center {
+      background: pink;
+    }
+
+    .right {
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="layout shuangfeiyi">
+    <style>
+      .shuangfeiyi .box {
+        min-width: 600px;
+      }
+
+      .shuangfeiyi .box .center .inner {
+        margin: 0 200px;
+      }
+
+      .shuangfeiyi .box .center {
+        width: 100%;
+        float: left;
+      }
+
+      .shuangfeiyi .box .left {
+        float: left;
+        width: 200px;
+        margin-left: -100%;
+      }
+
+      .shuangfeiyi .box .right {
+        float: left;
+        width: 200px;
+        margin-left: -200px;
+      }
+    </style>
+    <h1>三栏布局</h1>
+    <article class="box">
+      <div class="center">
+        <div class="inner">
+          <h2>双飞翼布局</h2>
+          <p>三栏布局-双飞翼布局</p>
+          <p>三栏布局-双飞翼布局</p>
+          <p>三栏布局-双飞翼布局</p>
+          <p>三栏布局-双飞翼布局</p>
+          <p>三栏布局-双飞翼布局</p>
+        </div>
+      </div>
+      <div class="left"></div>
+      <div class="right"></div>
+    </article>
+  </section>
+</body>
+
+</html>

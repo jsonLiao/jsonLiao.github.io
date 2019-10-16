@@ -1,0 +1,66 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>三栏布局-float解决方案</title>
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    .left {
+      background: red;
+    }
+
+    .center {
+      background: pink;
+    }
+
+    .right {
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="layout float">
+    <style>
+      .float .box .left {
+        float: left;
+        width: 200px;
+        clear: both;
+      }
+
+      .float .box .right {
+        float: right;
+        width: 200px;
+      }
+      .float .box .center{
+        /*创建bfc */
+        overflow: hidden;
+      }
+    </style>
+    <h1>三栏布局</h1>
+    <article class="box">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="center">
+        <h2>float解决方案</h2>
+        <p>三栏布局-float解决方案</p>
+        <p>三栏布局-float解决方案</p>
+        <p>三栏布局-float解决方案</p>
+        <p>三栏布局-float解决方案</p>
+        <p>三栏布局-float解决方案</p>
+      </div>
+    </article>
+  </section>
+</body>
+
+</html>

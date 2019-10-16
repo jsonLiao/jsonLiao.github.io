@@ -431,18 +431,34 @@ table {
 .demo-lists ul {
   width: 100%;
   overflow: hidden;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .demo-lists li {
+  margin: 0 10px 30px 10px;
   width: 180px;
   height: 180px;
-  float: left;
   border: 1px solid #ccc;
   text-align: center;
 }
 
 .demo-lists li .pic {
   height: 150px;
+}
+
+.demo-lists li .txt {
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #444;
+  border-bottom: 1px dashed #ccc;
 }
 
 .demo-lists li h5 {

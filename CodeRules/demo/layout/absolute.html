@@ -1,0 +1,73 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>三栏布局-absolute解决方案</title>
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    .left {
+      background: red;
+    }
+
+    .center {
+      background: pink;
+    }
+
+    .right {
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="layout absolute">
+    <style>
+      .absolute .box {
+        position: relative;
+      }
+
+      .absolute .box .left {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200px;
+      }
+
+      .absolute .box .right {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 200px;
+      }
+
+      .absolute .box .center {
+        margin: 0 200px;
+      }
+    </style>
+    <h1>三栏布局</h1>
+    <article class="box">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="center">
+        <h2>absolute解决方案</h2>
+        <p>三栏布局-absolute解决方案</p>
+        <p>三栏布局-absolute解决方案</p>
+        <p>三栏布局-absolute解决方案</p>
+        <p>三栏布局-absolute解决方案</p>
+        <p>三栏布局-absolute解决方案</p>
+      </div>
+    </article>
+  </section>
+</body>
+
+</html>

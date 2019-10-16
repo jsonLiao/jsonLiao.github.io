@@ -1,0 +1,625 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>flex布局</title>
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    h1.title {
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px dashed #aaa;
+    }
+
+    h3 {
+      margin: 2em;
+    }
+
+    blockquote {
+      background-color: #f5f2f0;
+      padding: 1em;
+      margin: 2em 2em;
+      border-radius: 1em;
+      border-width: .3em;
+      border-color: #e0dfcc;
+      border-style: solid;
+      text-shadow: 0 1px white;
+      overflow: auto;
+    }
+
+    .arclist {
+      margin-left: 2em;
+    }
+
+    .arclist li {
+      line-height: 2em;
+    }
+
+    h4 {
+      margin: 0 2em;
+    }
+
+    .box {
+      width: 200px;
+      border: 2px solid #000;
+      padding: 1em 0.5em;
+      display: flex;
+    }
+
+    .box-item {
+      float: left;
+      margin-top: 0.5em;
+      margin-left: 1em;
+    }
+
+    .box .item {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="title">flex布局</h1>
+  <h3>1、flex容器的属性</h3>
+  <blockquote>
+    <ul class="arclist">
+      <li>flex-direction</li>
+      <li>flex-wrap</li>
+      <li>flex-flow</li>
+      <li>justify-content</li>
+      <li>align-items</li>
+      <li>align-content</li>
+    </ul>
+  </blockquote>
+  <h4>flex-direction属性--决定主轴的方向（即项目的排列方向）。</h4>
+  <blockquote>
+    <style>
+      .direction1 {
+        flex-direction: row;
+      }
+
+      .direction2 {
+        flex-direction: row-reverse;
+      }
+
+      .direction3 {
+        flex-direction: column;
+      }
+
+      .direction4 {
+        flex-direction: column-reverse;
+      }
+    </style>
+    <ul class="arclist">
+      <li><code>row</code>（默认值）：主轴为水平方向，起点在左端。</li>
+      <li><code>row-reverse</code>：主轴为水平方向，起点在右端。</li>
+      <li><code>column</code>：主轴为垂直方向，起点在上沿。</li>
+      <li><code>column-reverse</code>：主轴为垂直方向，起点在下沿。</li>
+    </ul>
+    <div class="box box-item direction1">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item direction2">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item direction3">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item direction4">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </blockquote>
+  <h4>flex-wrap属性--默认情况下，项目都排在一条线（又称"轴线"）上</h4>
+  <blockquote>
+    <style>
+      .wrap1 {
+        flex-wrap: nowrap;
+      }
+
+      .wrap2 {
+        flex-wrap: wrap;
+      }
+
+      .wrap3 {
+        flex-wrap: wrap-reverse;
+      }
+    </style>
+    <ul class="arclist">
+      <li><code>nowrap</code>（默认）：不换行。</li>
+      <li><code>wrap</code>换行，第一行在上方</li>
+      <li><code>wrap-reverse</code>换行，第一行在下方。</li>
+    </ul>
+    <div class="box box-item wrap1">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+    </div>
+    <div class="box box-item wrap2">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+    </div>
+    <div class="box box-item wrap3">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+    </div>
+  </blockquote>
+
+  <h4>flex-flow属性--属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.box </span><span class="token punctuation">{</span>
+  <span class="token property">flex-flow</span><span class="token punctuation">:</span> <span class="token ignore">&lt;</span>flex-direction&gt; || <span class="token ignore">&lt;</span>flex-wrap&gt;<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+
+  <h4>justify-content属性--定义了项目在主轴上的对齐方式。</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.box </span><span class="token punctuation">{</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> flex-start | flex-end | center | space-between | space-around<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+  <blockquote>
+    <style>
+      .justify {
+        width: 260px;
+      }
+
+      .justify1 {
+        justify-content: flex-start;
+      }
+
+      .justify2 {
+        justify-content: flex-end;
+      }
+
+      .justify3 {
+        justify-content: center;
+      }
+
+      .justify4 {
+        justify-content: space-between;
+      }
+
+      .justify5 {
+        justify-content: space-around;
+      }
+    </style>
+    <ul class="arclist">
+      <li><code>flex-start</code>（默认值）：左对齐</li>
+      <li><code>flex-end</code>：右对齐</li>
+      <li><code>center</code>： 居中</li>
+      <li><code>space-between</code>：两端对齐，项目之间的间隔都相等。</li>
+      <li><code>space-around</code>：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</li>
+    </ul>
+    <div class="box box-item justify justify1">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item justify justify2">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item justify justify3">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item justify justify4">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item justify justify5">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </blockquote>
+
+  <h4>align-items属性--定义项目在交叉轴上如何对齐。</h4>
+  <blockquote>
+    <pre class=" language-css">
+      <code class=" language-css">
+<span class="token selector">.box </span><span class="token punctuation">{</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> flex-start | flex-end | center | baseline | stretch<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+  <blockquote>
+    <style>
+      .items {
+        height: 100px;
+      }
+
+      .items1 {
+        align-items: flex-start;
+      }
+
+      .items2 {
+        align-items: flex-end;
+      }
+
+      .items3 {
+        align-items: center;
+      }
+
+      .items4 {
+        align-items: baseline;
+      }
+
+      .items5 {
+        align-items: stretch;
+      }
+
+      .items5 .item {
+        height: auto;
+      }
+    </style>
+    <ul class="arclist">
+      <li><code>flex-start</code>：交叉轴的起点对齐。</li>
+      <li><code>flex-end</code>：交叉轴的终点对齐。</li>
+      <li><code>center</code>：交叉轴的中点对齐。</li>
+      <li><code>baseline</code>: 项目的第一行文字的基线对齐。</li>
+      <li><code>stretch</code>（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
+    </ul>
+    <div class="box box-item items items1">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item items items2">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item items items3">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item items items4">
+      <div class="item" style="line-height: 22px;">
+        <p>text</p>
+        <p>text</p>
+      </div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+    <div class="box box-item items items5">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </blockquote>
+
+  <h4>align-content属性--定义了多根轴线的对齐方式。(如果项目只有一根轴线，该属性不起作用)</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.box </span><span class="token punctuation">{</span>
+  <span class="token property">align-content</span><span class="token punctuation">:</span> flex-start | flex-end | center | space-between | space-around | stretch<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+  <blockquote>
+    <ul class="arclist">
+      <li><code>flex-start</code>：与交叉轴的起点对齐。</li>
+      <li><code>flex-end</code>：与交叉轴的终点对齐。</li>
+      <li><code>center</code>：与交叉轴的中点对齐。</li>
+      <li><code>space-between</code>：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
+      <li><code>space-around</code>：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
+      <li><code>stretch</code>（默认值）：轴线占满整个交叉轴。</li>
+    </ul>
+    <style>
+      .acont {
+        height: 200px;
+        flex-wrap: wrap;
+      }
+
+      .acont1 {
+        align-content: flex-start;
+      }
+
+      .acont2 {
+        align-content: flex-end;
+      }
+
+      .acont3 {
+        align-content: center;
+      }
+
+      .acont4 {
+        align-content: space-between;
+      }
+
+      .acont5 {
+        align-content: space-around;
+      }
+
+      .acont6 {
+        align-content: stretch;
+      }
+
+      .acont6 .item {
+        height: auto;
+      }
+    </style>
+    <div class="box box-item acont acont1">
+      <div class="item">1</div>
+      <div class="item" style="width: 30px;">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <div class="box box-item acont acont2">
+      <div class="item">1</div>
+      <div class="item" style="width: 30px;">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <div class="box box-item acont acont3">
+      <div class="item">1</div>
+      <div class="item" style="width: 30px;">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <div class="box box-item acont acont4">
+      <div class="item">1</div>
+      <div class="item" style="width: 30px;">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <div class="box box-item acont acont5">
+      <div class="item">1</div>
+      <div class="item" style="width: 30px;">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <div class="box box-item acont acont6">
+      <div class="item">1</div>
+      <div class="item" style="width: 30px;">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+  </blockquote>
+
+  <h3>2、项目的属性</h3>
+  <blockquote>
+    <ul class="arclist">
+      <li><code>order</code></li>
+      <li><code>flex-grow</code></li>
+      <li><code>flex-shrink</code></li>
+      <li><code>flex-basis</code></li>
+      <li><code>flex</code></li>
+      <li><code>align-self</code></li>
+    </ul>
+  </blockquote>
+  <h4>2.1、order属性--定义项目的排列顺序。数值越小，排列越靠前，默认为0。</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.item </span><span class="token punctuation">{</span>
+  <span class="token property">order</span><span class="token punctuation">:</span> <span class="token ignore">&lt;</span>integer&gt;<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+  <blockquote>
+    <style>
+      .order .item:nth-child(1) {
+        order: 2
+      }
+
+      .order .item:nth-child(2) {
+        order: 3
+      }
+    </style>
+    <div class="box box-item order">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+  </blockquote>
+
+  <h4>2.2、flex-grow属性--定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.item </span><span class="token punctuation">{</span>
+  <span class="token property">flex-grow</span><span class="token punctuation">:</span> <span class="token ignore">&lt;</span>number&gt;<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* default 0 */</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+  <blockquote>
+    <style>
+      .grow {
+        width: 400px;
+      }
+
+      .grow .item:nth-of-type(1) {
+        flex-grow: 2
+      }
+
+      .grow .item:nth-of-type(2) {
+        flex-grow: 2
+      }
+    </style>
+    <div class="box box-item grow">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </blockquote>
+
+  <h4>2.3、flex-shrink属性--定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.item </span><span class="token punctuation">{</span>
+  <span class="token property">flex-shrink</span><span class="token punctuation">:</span> <span class="token ignore">&lt;</span>number&gt;<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* default 1 */</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+  <blockquote>
+    <style>
+      .shrink {
+        width: 400px;
+      }
+
+      .shrink .item:nth-of-type(1) {
+        flex-shrink: 3
+      }
+
+      .shrink .item:nth-of-type(2) {
+        flex-shrink: 3
+      }
+    </style>
+    <div class="box box-item shrink">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+      <div class="item">7</div>
+    </div>
+  </blockquote>
+
+  <h4>2.4、flex-basis属性--定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.item </span><span class="token punctuation">{</span>
+  <span class="token property">flex-basis</span><span class="token punctuation">:</span> <span class="token ignore">&lt;</span>length&gt; | auto<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* default auto */</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+
+  <blockquote>
+    <style>
+      .basis {
+        width: 400px;
+      }
+
+      .basis .item:nth-of-type(4) {
+        flex-basis: 150px;
+      }
+    </style>
+    <div class="box box-item basis">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+    </div>
+  </blockquote>
+
+  <h4>2.5、flex属性--是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.item </span><span class="token punctuation">{</span>
+  <span class="token property">flex</span><span class="token punctuation">:</span> none | [ <span class="token ignore">&lt;</span><span class="token string">'flex-grow'</span>&gt; <span class="token ignore">&lt;</span><span class="token string">'flex-shrink'</span>&gt;? || <span class="token ignore">&lt;</span><span class="token string">'flex-basis'</span>&gt; ]
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+  <blockquote>
+    <style>
+      .flex {
+        width: 400px;
+      }
+
+      .flex .item:nth-of-type(3) {
+        flex: 1;
+      }
+
+      .flex .item:nth-of-type(4) {
+        flex: 1;
+      }
+    </style>
+    <div class="box box-item flex">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+    </div>
+  </blockquote>
+
+  <h4>2.6、align-self属性--允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</h4>
+  <blockquote>
+    <pre class=" language-css"><code class=" language-css">
+<span class="token selector">.item </span><span class="token punctuation">{</span>
+  <span class="token property">align-self</span><span class="token punctuation">:</span> auto | flex-start | flex-end | center | baseline | stretch<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+  </blockquote>
+  <blockquote>
+    <style>
+      .self {
+        width: 400px;
+        height: 200px;
+      }
+
+      .self .item:nth-of-type(1) {
+        align-self: flex-start
+      }
+
+      .self .item:nth-of-type(2) {
+        align-self: center;
+      }
+
+      .self .item:nth-of-type(3) {
+      align-self: flex-end;
+      }
+      .self .item:nth-of-type(4) {
+      align-self: auto;
+      }
+      .self .item:nth-of-type(5) {
+      align-self: baseline;
+      }
+    </style>
+    <div class="box box-item self">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+  </blockquote>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>三栏布局-圣杯布局</title>
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    .left {
+      background: red;
+    }
+
+    .center {
+      background: pink;
+    }
+
+    .right {
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="layout shengbei">
+    <style>
+      .shengbei .box {
+        padding: 0 200px;
+      }
+
+      .shengbei .box .center {
+        float: left;
+        width: 100%;
+        height: 300px;
+      }
+
+      .shengbei .box .left {
+        float: left;
+        width: 200px;
+        margin-left: -100%;
+        position: relative;
+        left: -200px;
+      }
+
+      .shengbei .box .right {
+        float: left;
+        width: 200px;
+        margin-left: -200px;
+        position: relative;
+        right: -200px;
+      }
+    </style>
+    <h1>三栏布局</h1>
+    <article class="box">
+      <div class="center">
+        <h2>圣杯布局</h2>
+        <p>三栏布局-圣杯布局</p>
+        <p>三栏布局-圣杯布局</p>
+        <p>三栏布局-圣杯布局</p>
+        <p>三栏布局-圣杯布局</p>
+        <p>三栏布局-圣杯布局</p>
+      </div>
+      <div class="left"></div>
+      <div class="right"></div>
+    </article>
+  </section>
+</body>
+
+</html>
