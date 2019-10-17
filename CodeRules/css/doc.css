@@ -331,10 +331,16 @@ body .example-links {
 .sdmenu .con {
   display: none;
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .sdmenu .collapsed .con {
   display: block;
+}
+
+.sdmenu .con h4 code{
+  font-weight: bold;
+  color: orange;
 }
 
 .sdmenu .tit {
@@ -518,4 +524,36 @@ table {
   font-weight: bold;
   font-size: 18px;
   color: #202020;
+}
+
+.article-box h1.title {
+  padding: 10px 0;
+  text-align: center;
+  border-bottom: 1px dashed #aaa;
+}
+
+.article-box h3 {
+  margin: 2em;
+}
+
+.article-box blockquote {
+  background-color: #f5f2f0;
+  padding: 1em;
+  margin: 2em 2em;
+  border-radius: 1em;
+  border-width: .3em;
+  border-color: #e0dfcc;
+  border-style: solid;
+  text-shadow: 0 1px white;
+  overflow: auto;
+}
+
+.article-box .arclist,
+.article-box .numlist {
+  margin-left: 2em;
+}
+
+.article-box .arclist li,
+.article-box .numlist li {
+  line-height: 2em;
 }

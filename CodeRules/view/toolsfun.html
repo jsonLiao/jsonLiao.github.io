@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>代码规范</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="../css/doc.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/shCore.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="J_menu" class="sdmenu">
+      <div class="list">
+        <span class="tit">数组</span>
+        <section class="con">
+          <h4>1. <code>all</code>：布尔全等判断</h4>
+          <pre class="language-javscript">
+            const all = (arr, fn = Boolean) => arr.every(fn);
+
+            all([4, 2, 3], x => x > 1); // true
+            all([1, 2, 3]); // true
+          </pre>
+          <h4>2. <code>allEqual</code>：检查数组各项相等</h4>
+          <pre class="language-javscript">
+            const allEqual = arr => arr.every(val => val === arr[0]);
+
+            allEqual([1, 2, 3, 4, 5, 6]); // false
+            allEqual([1, 1, 1, 1]); // true
+          </pre>
+          <h4>3. <code>approximatelyEqual</code>：约等于</h4>
+          <pre class="language-javscript">
+            const approximatelyEqual = (v1, v2, epsilon = 0.001) => Math.abs(v1 - v2) < epsilon;
+            approximatelyEqual(Math.PI / 2.0, 1.5708); // true
+          </pre>
+
+          <h4>4. <code>arrayToCSV</code>：数组转CSV格式（带空格的字符串）</h4>
+          <pre class="language-javscript">
+            const arrayToCSV = (arr, delimiter = ',') =>
+            arr.map(v => v.map(x => `"${x}"`).join(delimiter)).join('\n');
+
+            arrayToCSV([['a', 'b'], ['c', 'd']]); // '"a","b"\n"c","d"'
+            arrayToCSV([['a', 'b'], ['c', 'd']], ';'); // '"a";"b"\n"c";"d"'
+          </pre>
+
+          <h4>5. <code>arrayToHtmlList</code>：数组转li列表</h4>
+          <pre class="language-javscript">
+            const arrayToHtmlList = (arr, listID) =>
+            (el => (
+            (el = document.querySelector('#' + listID)),
+            (el.innerHTML += arr.map(item => `<li>${item}</li>`).join(''))
+            ))();
+
+            arrayToHtmlList(['item 1', 'item 2'], 'myListID');
+          </pre>
+
+          <h4>6. <code>average</code>：平均数</h4>
+          <pre class="language-javscript">
+            const average = (...nums) => nums.reduce((acc, val) => acc + val, 0) / nums.length;
+            average(...[1, 2, 3]); // 2
+            average(1, 2, 3); // 2
+          </pre>
+
+          <h4>7. <code>averageBy</code>：数组对象属性平均数</h4>
+          <pre class="language-javscript">
+            const averageBy = (arr, fn) =>
+            arr.map(typeof fn === 'function' ? fn : val => val[fn]).reduce((acc, val) => acc + val, 0) /
+            arr.length;
+
+            averageBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], o => o.n); // 5
+            averageBy([{ n: 4 }, { n: 2 }, { n: 8 }, { n: 6 }], 'n'); // 5
+          </pre>
+
+          <h4>8. <code>bifurcate</code>：拆分断言后的数组</h4>
+          <pre class="language-javscript">
+            const bifurcate = (arr, filter) =>
+            arr.reduce((acc, val, i) => (acc[filter[i] ? 0 : 1].push(val), acc), [[], []]);
+            bifurcate(['beep', 'boop', 'foo', 'bar'], [true, true, false, true]); // [ ['beep', 'boop', 'bar'], ['foo'] ]
+          </pre>
+
+          <h4>9. <code>castArray</code>：其它类型转数组</h4>
+          <pre class="language-javscript">
+            const castArray = val => (Array.isArray(val) ? val : [val]);
+
+            castArray('foo'); // ['foo']
+            castArray([1]); // [1]
+            castArray(1); // [1]
+          </pre>
+          <h4>10. <code>compact</code>：去除数组中的无效/无用值</h4>
+          <pre class="language-javscript">
+            const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+            countOccurrences([1, 1, 2, 1, 2, 3], 1); // 3
+          </pre>
+          <h4>11. <code>countOccurrences</code>：检测数值出现次数</h4>
+          <pre class="language-javscript">
+            const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+            countOccurrences([1, 1, 2, 1, 2, 3], 1); // 3
+          </pre>
+          <h4>12. <code>deepFlatten</code>：递归扁平化数组</h4>
+          <pre class="language-javscript">
+            const deepFlatten = arr => [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)));
+
+            deepFlatten([1, [2], [[3], 4], 5]); // [1,2,3,4,5]
+          </pre>
+          <h4>13. <code>difference</code>：寻找差异（并返回第一个数组独有的）</h4>
+          <pre class="language-javscript">
+            const difference = (a, b) => {
+            const s = new Set(b);
+            return a.filter(x => !s.has(x));
+            };
+
+            difference([1, 2, 3], [1, 2, 4]); // [3]
+          </pre>
+          <h4>14. <code>differenceBy</code>：先执行再寻找差异</h4>
+          <pre class="language-javscript">
+            const differenceBy = (a, b, fn) => {
+            const s = new Set(b.map(fn));
+            return a.filter(x => !s.has(fn(x)));
+            };
+
+            differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor); // [1.2]
+            differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], v => v.x); // [ { x: 2 } ]
+          </pre>
+          <h4>15. <code>dropWhile</code>：删除不符合条件的值</h4>
+          <pre class="language-javscript">
+            const dropWhile = (arr, func) => {
+            while (arr.length > 0 && !func(arr[0])) arr = arr.slice(1);
+            return arr;
+            };
+
+            dropWhile([1, 2, 3, 4], n => n >= 3); // [3,4]
+          </pre>
+          <h4>16. <code>flatten</code>：指定深度扁平化数组</h4>
+          <pre class="language-javscript">
+            const flatten = (arr, depth = 1) =>
+            arr.reduce((a, v) => a.concat(depth > 1 && Array.isArray(v) ? flatten(v, depth - 1) : v), []);
+
+            flatten([1, [2], 3, 4]); // [1, 2, 3, 4]
+            flatten([1, [2, [3, [4, 5], 6], 7], 8], 2); // [1, 2, 3, [4, 5], 6, 7, 8]
+          </pre>
+          <h4>17. <code>indexOfAll</code>：返回数组中某值的所有索引</h4>
+          <pre class="language-javscript">
+            const indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
+
+            indexOfAll([1, 2, 3, 1, 2, 3], 1); // [0,3]
+            indexOfAll([1, 2, 3], 4); // []
+          </pre>
+          <h4>18. <code>intersection</code>：两数组的交集</h4>
+          <pre class="language-javscript">
+            const intersection = (a, b) => {
+            const s = new Set(b);
+            return a.filter(x => s.has(x));
+            };
+
+            intersection([1, 2, 3], [4, 3, 2]); // [2, 3]
+          </pre>
+          <h4>19. <code>intersectionWith</code>：两数组都符合条件的交集</h4>
+          <pre class="language-javscript">
+            const intersectionBy = (a, b, fn) => {
+            const s = new Set(b.map(fn));
+            return a.filter(x => s.has(fn(x)));
+            };
+
+            intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor); // [2.1]
+          </pre>
+          <h4>20. <code>intersectionWith</code>：先比较后返回交集</h4>
+          <pre class="language-javscript">
+            const intersectionWith = (a, b, comp) => a.filter(x => b.findIndex(y => comp(x, y)) !== -1);
+
+            intersectionWith([1, 1.2, 1.5, 3, 0], [1.9, 3, 0, 3.9], (a, b) => Math.round(a) === Math.round(b)); // [1.5, 3, 0]
+          </pre>
+          <h4>21. <code>minN</code>：返回指定长度的升序数组</h4>
+          <pre class="language-javscript">
+            const minN = (arr, n = 1) => [...arr].sort((a, b) => a - b).slice(0, n);
+
+            minN([1, 2, 3]); // [1]
+            minN([1, 2, 3], 2); // [1,2]
+          </pre>
+          <h4>22. <code>negate</code>：根据条件反向筛选</h4>
+          <pre class="language-javscript">
+            const negate = func => (...args) => !func(...args);
+
+            [1, 2, 3, 4, 5, 6].filter(negate(n => n % 2 === 0)); // [ 1, 3, 5 ]
+          </pre>
+          <h4>23. <code>randomIntArrayInRange</code>：生成两数之间指定长度的随机数组</h4>
+          <pre class="language-javscript">
+            const randomIntArrayInRange = (min, max, n = 1) =>
+            Array.from({ length: n }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+
+            randomIntArrayInRange(12, 35, 10); // [ 34, 14, 27, 17, 30, 27, 20, 26, 21, 14 ]
+          </pre>
+          <h4>24. <code>sample</code>：在指定数组中获取随机数</h4>
+          <pre class="language-javscript">
+            const sample = arr => arr[Math.floor(Math.random() * arr.length)];
+
+            sample([3, 7, 9, 11]); // 9
+          </pre>
+          <h4>25. <code>sampleSize</code>：在指定数组中获取指定长度的随机数</h4>
+          <pre class="language-javscript">
+            const sampleSize = ([...arr], n = 1) => {
+            let m = arr.length;
+            while (m) {
+            const i = Math.floor(Math.random() * m--);
+            [arr[m], arr[i]] = [arr[i], arr[m]];
+            }
+            return arr.slice(0, n);
+            };
+
+            sampleSize([1, 2, 3], 2); // [3,1]
+            sampleSize([1, 2, 3], 4); // [2,3,1]
+          </pre>
+          <h4>26. <code>shuffle</code>：“洗牌” 数组</h4>
+          <pre class="language-javscript">
+            // 此代码段使用Fisher-Yates算法随机排序数组的元素。
+            const shuffle = ([...arr]) => {
+            let m = arr.length;
+            while (m) {
+            const i = Math.floor(Math.random() * m--);
+            [arr[m], arr[i]] = [arr[i], arr[m]];
+            }
+            return arr;
+            };
+
+            const foo = [1, 2, 3];
+            shuffle(foo); // [2, 3, 1], foo = [1, 2, 3]
+          </pre>
+          <h4>27. <code>nest</code>：根据parent_id生成树结构（阿里一面真题）</h4>
+          <pre class="language-javscript">
+            //根据每项的parent_id，生成具体树形结构的对象。
+            const nest = (items, id = null, link = 'parent_id') =>
+            items
+            .filter(item => item[link] === id)
+            .map(item => ({ ...item, children: nest(items, item.id) }));
+
+            // 用法
+            const comments = [
+              { id: 1, parent_id: null , name: '菜单1'},
+              { id: 2, parent_id: 1, name: '菜单1-1'},
+              { id: 3, parent_id: 1, name: '菜单1-2'},
+              { id: 4, parent_id: 2 },
+              { id: 5, parent_id: 4 }
+            ];
+            const nestedComments = nest(comments); // [{ id: 1, parent_id: null, children: [...] }]
+          </pre>
+        </section>
+      </div>
+      <div class="list">
+        <span class="tit">函数</span>
+        <section class="con">
+          <h4>1. <code>attempt</code>：捕获函数运行异常</h4>
+          <pre class="language-javscript">
+            //该代码段执行一个函数，返回结果或捕获的错误对象。
+            onst attempt = (fn, ...args) => {
+              try {
+                return fn(...args);
+              } catch (e) {
+                return e instanceof Error ? e : new Error(e);
+              }
+            };
+            var elements = attempt(function(selector) {
+              return document.querySelectorAll(selector);
+            }, '>_>');
+            if (elements instanceof Error) elements = []; // elements = []
+          </pre>
+          <h4>2. <code>defer</code>：推迟执行</h4>
+          <pre class="language-javscript">
+            // 此代码段延迟了函数的执行，直到清除了当前调用堆栈。
+            const defer = (fn, ...args) => setTimeout(fn, 1, ...args);
+
+            defer(console.log, 'a'), console.log('b'); // logs 'b' then 'a'
+          </pre>
+          <h4>3. <code>runPromisesInSeries</code>：运行多个Promises</h4>
+          <pre class="language-javscript">
+            const runPromisesInSeries = ps => ps.reduce((p, next) => p.then(next), Promise.resolve());
+            const delay = d => new Promise(r => setTimeout(r, d));
+
+            runPromisesInSeries([() => delay(1000), () => delay(2000)]);
+            //依次执行每个Promises ，总共需要3秒钟才能完成
+          </pre>
+          <h4>4. <code>timeTaken</code>：计算函数执行时间</h4>
+          <pre class="language-javscript">
+            const timeTaken = callback => {
+              console.time('timeTaken');
+              const r = callback();
+              console.timeEnd('timeTaken');
+              return r;
+            };
+
+            timeTaken(() => Math.pow(2, 10)); // 1024, (logged): timeTaken: 0.02099609375ms
+          </pre>
+          <h4>5. <code>createEventHub</code>：简单的发布/订阅模式</h4>
+          <blockquote>
+            <ol>
+              <li>使用<code>Object.create(null)</code>创建一个空的<code>hub</code>对象。</li>
+              <li><code>emit</code>，根据<code>event</code>参数解析处理程序数组，然后<code>.forEach()</code>通过传入数据作为参数来运行每个处理程序。</li>
+              <li><code>on</code>，为事件创建一个数组（若不存在则为空数组），然后<code>.push()</code>将处理程序添加到该数组。</li>
+              <li><code>off</code>，用<code>.findIndex()</code>在事件数组中查找处理程序的索引，并使用<code>.splice()</code>删除。</li>
+            </ol>
+          </blockquote>
+          <pre class="language-javscript">
+            const createEventHub = () => ({
+              hub: Object.create(null),
+              emit(event, data) {
+                (this.hub[event] || []).forEach(handler => handler(data));
+              },
+              on(event, handler) {
+                if (!this.hub[event]) this.hub[event] = [];
+                this.hub[event].push(handler);
+              },
+              off(event, handler) {
+                const i = (this.hub[event] || []).findIndex(h => h === handler);
+                if (i > -1) this.hub[event].splice(i, 1);
+                if (this.hub[event].length === 0) delete this.hub[event];
+              }
+            });
+
+            // 用法
+            const handler = data => console.log(data);
+            const hub = createEventHub();
+            let increment = 0;
+
+            // 订阅，监听不同事件
+            hub.on('message', handler);
+            hub.on('message', () => console.log('Message event fired'));
+            hub.on('increment', () => increment++);
+
+            // 发布：发出事件以调用所有订阅给它们的处理程序，并将数据作为参数传递给它们
+            hub.emit('message', 'hello world'); // 打印 'hello world' 和 'Message event fired'
+            hub.emit('message', { hello: 'world' }); // 打印 对象 和 'Message event fired'
+            hub.emit('increment'); // increment = 1
+
+            // 停止订阅
+            hub.off('message', handler);
+          </pre>
+          <h4>6. <code>memoize</code>：缓存函数</h4>
+          <pre class="language-javscript">
+            // Vue源码
+            /**
+            * Create a cached version of a pure function.
+            */
+            export function cached<F: Function> (fn: F): F {
+              const cache = Object.create(null)
+              return (function cachedFn (str: string) {
+                const hit = cache[str]
+                return hit || (cache[str] = fn(str))
+              }: any)
+            }
+          </pre>
+          <h4>7. <code>once</code>：只调用一次的函数</h4>
+          <pre class="language-javscript">
+            const once = fn => {
+            let called = false
+            return function () {
+              if (!called) {
+                called = true
+                fn.apply(this, arguments)
+              }
+            }
+          };
+          </pre>
+        </section>
+      </div>
+      <div class="list">
+        <span class="tit">对象</span>
+        <section class="con">
+          <h4>1. <code>dayOfYear</code>：当前日期天数</h4>
+          <pre class="language-javscript">
+            const dayOfYear = date =>
+            Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+
+            dayOfYear(new Date()); // 285
+          </pre>
+          <h4>2. <code>forOwn</code>：迭代属性并执行回调</h4>
+          <pre class="language-javscript">
+            const forOwn = (obj, fn) => Object.keys(obj).forEach(key => fn(obj[key], key, obj));
+
+            forOwn({ foo: 'bar', a: 1 }, v => console.log(v)); // 'bar', 1
+          </pre>
+          <h4>3. <code>Get Time From Date</code>：返回当前24小时制时间的字符串</h4>
+          <pre class="language-javscript">
+            const getColonTimeFromDate = date => date.toTimeString().slice(0, 8);
+
+            getColonTimeFromDate(new Date()); // "08:38:00"
+          </pre>
+          <h4>4. <code>Get Days Between Dates</code>：返回日期间的天数</h4>
+          <pre class="language-javscript">
+            const getDaysDiffBetweenDates = (dateInitial, dateFinal) =>
+            (dateFinal - dateInitial) / (1000 * 3600 * 24);
+
+            getDaysDiffBetweenDates(new Date('2019-01-01'), new Date('2019-10-14')); // 286
+          </pre>
+          <h4>5. <code>is</code>：检查值是否为特定类型。</h4>
+          <pre class="language-javscript">
+            const is = (type, val) => ![, null].includes(val) && val.constructor === type;
+
+            is(Array, [1]); // true
+            is(ArrayBuffer, new ArrayBuffer()); // true
+            is(Map, new Map()); // true
+            is(RegExp, /./g); // true
+            is(Set, new Set()); // true
+            is(WeakMap, new WeakMap()); // true
+            is(WeakSet, new WeakSet()); // true
+            is(String, ''); // true
+            is(String, new String('')); // true
+            is(Number, 1); // true
+            is(Number, new Number(1)); // true
+            is(Boolean, true); // true
+            is(Boolean, new Boolean(true)); // true
+          </pre>
+          <h4>6. <code>isAfterDate</code>：检查是否在某日期后</h4>
+          <pre class="language-javscript">
+            const isAfterDate = (dateA, dateB) => dateA > dateB;
+
+            isAfterDate(new Date(2010, 10, 21), new Date(2010, 10, 20)); // true
+          </pre>
+          <h4>7. <code>isBeforeDate</code>：检查是否在某日期前</h4>
+          <pre class="language-javscript">
+            const isBeforeDate = (dateA, dateB) => dateA < dateB;
+            
+            isBeforeDate(new Date(2010, 10, 20), new Date(2010, 10, 21)); // true
+          </pre>
+          <h4>8. <code>isBeforeDate</code>：获取明天的字符串格式时间</h4>
+          <pre class="language-javscript">
+            const tomorrow = () => {
+              let t = new Date();
+              t.setDate(t.getDate() + 1);
+              return t.toISOString().split('T')[0];
+            };
+
+            tomorrow(); // 2019-10-15 (如果明天是2019-10-15)
+          </pre>
+          <h4>9. <code>equals</code>：全等判断</h4>
+          <pre class="language-javscript">
+            const equals = (a, b) => {
+              if (a === b) return true;
+              if (a instanceof Date && b instanceof Date) return a.getTime() === b.getTime();
+              if (!a || !b || (typeof a !== 'object' && typeof b !== 'object')) return a === b;
+              if (a.prototype !== b.prototype) return false;
+              let keys = Object.keys(a);
+              if (keys.length !== Object.keys(b).length) return false;
+              return keys.every(k => equals(a[k], b[k]));
+            };
+
+            // 用法 
+            equals({ a: [2, { e: 3 }], b: [4], c: 'foo' }, { a: [2, { e: 3 }], b: [4], c: 'foo' }); // true
+          </pre>
+        </section>
+      </div>
+      <div class="list">
+        <span class="tit">数字</span>
+        <section class="con">
+          <h4>1. <code>randomIntegerInRange</code>：生成指定范围的随机整数</h4>
+          <pre class="language-javscript">
+            const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+            randomIntegerInRange(0, 5); // 3
+          </pre>
+          <h4>2. <code>randomNumberInRange</code>：生成指定范围的随机小数</h4>
+          <pre class="language-javscript">
+            const randomNumberInRange = (min, max) => Math.random() * (max - min) + min;
+
+            randomNumberInRange(2, 10); // 6.0211363285087005
+          </pre>
+          <h4>3. <code>round</code>：四舍五入到指定位数</h4>
+          <pre class="language-javscript">
+            const round = (n, decimals = 0) => Number(`${Math.round(`${n}e${decimals}`)}e-${decimals}`);
+
+            round(1.005, 2); // 1.01
+          </pre>
+          <h4>4. <code>sum</code>：计算数组或多个数字的总和</h4>
+          <pre class="language-javscript">
+            const sum = (...arr) => [...arr].reduce((acc, val) => acc + val, 0);
+
+            sum(1, 2, 3, 4); // 10
+            sum(...[1, 2, 3, 4]); // 10
+          </pre>
+          <h4>5. <code>toCurrency</code>：简单的货币单位转换</h4>
+          <pre class="language-javscript">
+            const toCurrency = (n, curr, LanguageFormat = undefined) =>
+            Intl.NumberFormat(LanguageFormat, { style: 'currency', currency: curr }).format(n);
+
+            toCurrency(123456.789, 'EUR'); // €123,456.79
+            toCurrency(123456.789, 'USD', 'en-us'); // $123,456.79
+            toCurrency(123456.789, 'USD', 'fa'); // ۱۲۳٬۴۵۶٫۷۹
+            toCurrency(322342436423.2435, 'JPY'); // ¥322,342,436,423
+          </pre>
+        </section>
+      </div>
+      <div class="list">
+        <span class="tit">字符串</span>
+        <section class="con">
+          <h4>1. <code>byteSize</code>：返回字符串的字节长度</h4>
+          <pre class="language-javscript">
+            const byteSize = str => new Blob([str]).size;
+
+            byteSize('😀'); // 4
+            byteSize('Hello World'); // 11
+          </pre>
+          <h4>2. <code>capitalize</code>：首字母大写</h4>
+          <pre class="language-javscript">
+            const capitalize = ([first, ...rest]) =>
+            first.toUpperCase() + rest.join('');
+
+            capitalize('fooBar'); // 'FooBar'
+            capitalize('fooBar', true); // 'Foobar'
+          </pre>
+          <h4>3. <code>capitalizeEveryWord</code>：每个单词首字母大写</h4>
+          <pre class="language-javscript">
+            const capitalizeEveryWord = str => str.replace(/\b[a-z]/g, char => char.toUpperCase());
+
+            capitalizeEveryWord('hello world!'); // 'Hello World!'
+          </pre>
+          <h4>4. <code>decapitalize</code>：首字母小写</h4>
+          <pre class="language-javscript">
+            const decapitalize = ([first, ...rest]) =>
+            first.toLowerCase() + rest.join('')
+
+            decapitalize('FooBar'); // 'fooBar'
+            decapitalize('FooBar', true); // 'fooBar'
+          </pre>
+          <h4>5. <code>luhnCheck</code>：银行卡号码校验（luhn算法）</h4>
+          <pre class="language-javscript">
+            const luhnCheck = num => {
+              let arr = (num + '')
+                .split('')
+                .reverse()
+                .map(x => parseInt(x));
+              let lastDigit = arr.splice(0, 1)[0];
+              let sum = arr.reduce((acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9), 0);
+              sum += lastDigit;
+              return sum % 10 === 0;
+            };
+
+            // 用法
+            luhnCheck('4485275742308327'); // true
+            luhnCheck(6011329933655299); // false
+            luhnCheck(123456789); // false
+          </pre>
+          <h4>6. <code>splitLines</code>：将多行字符串拆分为行数组。</h4>
+          <pre class="language-javscript">
+            //使用String.prototype.split()和正则表达式匹配换行符并创建一个数组。
+
+            const splitLines = str => str.split(/\r?\n/);
+
+            splitLines('This\nis a\nmultiline\nstring.\n'); // ['This', 'is a', 'multiline', 'string.' , '']
+          </pre>
+          <h4>7. <code>stripHTMLTags</code>：</h4>
+          <pre class="language-javscript">
+            const stripHTMLTags = str => str.replace(/<[^>]*>/g, '');
+
+            stripHTMLTags('<p><em>lorem</em> <strong>ipsum</strong></p>'); // 'lorem ipsum'
+          </pre>
+        </section>
+      </div>
+      <div class="list">
+        <span class="tit">浏览器操作及其它</span>
+        <section class="con">
+          <h4>1. <code>bottomVisible</code>：检查页面底部是否可见</h4>
+          <pre class="language-javscript">
+            const bottomVisible = () =>
+            document.documentElement.clientHeight + window.scrollY >=
+            (document.documentElement.scrollHeight || document.documentElement.clientHeight);
+
+            bottomVisible(); // true
+          </pre>
+          <h4>2. <code>Create Directory</code>：检查创建目录</h4>
+          <pre class="language-javscript">
+            //此代码段调用fs模块的existsSync()检查目录是否存在，如果不存在，则mkdirSync()创建该目录。
+            const fs = require('fs');
+            const createDirIfNotExists = dir => (!fs.existsSync(dir) ? fs.mkdirSync(dir) : undefined);
+            createDirIfNotExists('test');
+          </pre>
+          <h4>3. <code>currentURL</code>：返回当前链接url</h4>
+          <pre class="language-javscript">
+            const currentURL = () => window.location.href;
+
+            currentURL(); // 'https://juejin.im'
+          </pre>
+          <h4>4. <code>distance</code>：返回两点间的距离</h4>
+          <pre class="language-javscript">
+            //该代码段通过计算欧几里得距离来返回两点之间的距离。
+            const distance = (x0, y0, x1, y1) => Math.hypot(x1 - x0, y1 - y0);
+
+            distance(1, 1, 2, 3); // 2.23606797749979
+          </pre>
+          <h4>5. <code>elementContains</code>：检查是否包含子元素</h4>
+          <pre class="language-javscript">
+            const elementContains = (parent, child) => parent !== child && parent.contains(child);
+
+            elementContains(document.querySelector('head'), document.querySelector('title')); // true
+            elementContains(document.querySelector('body'), document.querySelector('body')); // false
+          </pre>
+          <h4>6. <code>getStyle</code>：返回指定元素的生效样式</h4>
+          <pre class="language-javscript">
+            const getStyle = (el, ruleName) => getComputedStyle(el)[ruleName];
+
+            getStyle(document.querySelector('p'), 'font-size'); // '16px'
+          </pre>
+          <h4>7. <code>getType</code>：返回值或变量的类型名</h4>
+          <pre class="language-javscript">
+            const getType = v =>
+            v === undefined ? 'undefined' : v === null ? 'null' : v.constructor.name.toLowerCase();
+
+            getType(new Set([1, 2, 3])); // 'set'
+            getType([1, 2, 3]); // 'array'
+          </pre>
+          <h4>8. <code>hasClass</code>：校验指定元素的类名</h4>
+          <pre class="language-javscript">
+            const hasClass = (el, className) => el.classList.contains(className);
+
+            hasClass(document.querySelector('p.special'), 'special'); // true
+          </pre>
+          <h4>9. <code>hide</code>：隐藏所有的指定标签</h4>
+          <pre class="language-javscript">
+            const hide = (...el) => [...el].forEach(e => (e.style.display = 'none'));
+
+            hide(document.querySelectorAll('img')); // 隐藏所有<img>标签
+          </pre>
+          <h4>10. <code>httpsRedirect</code>：HTTP 跳转 HTTPS</h4>
+          <pre class="language-javscript">
+            const httpsRedirect = () => {
+            if (location.protocol !== 'https:') location.replace('https://' + location.href.split('//')[1]);
+            };
+
+            httpsRedirect(); // 若在`http://www.baidu.com`, 则跳转到`https://www.baidu.com`
+          </pre>
+
+          <h4>11. <code>insertAfter</code>：在指定元素之后插入新元素</h4>
+          <pre class="language-javscript">
+            const insertAfter = (el, htmlString) => el.insertAdjacentHTML('afterend', htmlString);
+
+            insertAfter(document.getElementById('myId'), '<p>after</p>');
+          </pre>
+          <h4>12. <code>insertBefore</code>：在指定元素之前插入新元素</h4>
+          <pre class="language-javscript">
+            const insertBefore = (el, htmlString) => el.insertAdjacentHTML('beforebegin', htmlString);
+
+            insertBefore(document.getElementById('myId'), '<p>before</p>'); 
+          </pre>
+          <h4>13. <code>isBrowser</code>：检查是否为浏览器环境</h4>
+          <pre class="language-javscript">
+            const isBrowser = () => ![typeof window, typeof document].includes('undefined');
+
+            isBrowser(); // true (browser)
+            isBrowser(); // false (Node)
+          </pre>
+          <h4>14. <code>isBrowserTab</code>：检查当前标签页是否活动</h4>
+          <pre class="language-javscript">
+            const isBrowserTabFocused = () => !document.hidden;
+
+            isBrowserTabFocused(); // true
+          </pre>
+          
+          <h4>15. <code>nodeListToArray</code>：转换nodeList为数组</h4>
+          <pre class="language-javscript">
+            const nodeListToArray = nodeList => [...nodeList];
+
+            nodeListToArray(document.childNodes); // [<!DOCTYPE html>, html ]
+          </pre>
+          <h4>16. <code>Random Hexadecimal Color Code</code>：随机十六进制颜色</h4>
+          <pre class="language-javscript">
+            const randomHexColorCode = () => {
+              let n = (Math.random() * 0xfffff * 1000000).toString(16);
+              return '#' + n.slice(0, 6);
+            };
+
+            randomHexColorCode(); // "#e34155"
+          </pre>
+          <h4>17. <code>scrollToTop</code>：平滑滚动至顶部</h4>
+          <pre class="language-javscript">
+            const scrollToTop = () => {
+              const c = document.documentElement.scrollTop || document.body.scrollTop;
+              if (c > 0) {
+                window.requestAnimationFrame(scrollToTop);
+                window.scrollTo(0, c - c / 8);
+              }
+            };
+
+            scrollToTop();
+          </pre>
+          <h4>18. <code>smoothScroll</code>：滚动到指定元素区域</h4>
+          <pre class="language-javscript">
+            const smoothScroll = element =>
+              document.querySelector(element).scrollIntoView({
+                behavior: 'smooth'
+              });
+              
+            smoothScroll('#fooBar'); 
+            smoothScroll('.fooBar'); 
+          </pre>
+          <h4>19. <code>detectDeviceType</code>：检测移动/PC设备</h4>
+          <pre class="language-javscript">
+            const detectDeviceType = () =>
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+              ? 'Mobile'
+              : 'Desktop';
+          </pre>
+          <h4>20. <code>getScrollPosition</code>：返回当前的滚动位置</h4>
+          <pre class="language-javscript">
+            // 默认参数为window ，pageXOffset(pageYOffset)为第一选择，没有则用scrollLeft(scrollTop)
+            const getScrollPosition = (el = window) => ({
+              x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
+              y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
+            });
+
+            getScrollPosition(); // {x: 0, y: 200}
+          </pre>
+
+          <h4>21. <code>toCurrency</code>：获取不同类型变量的字节长度</h4>
+          <pre class="language-javscript">
+            // 这个的实现非常巧妙，利用Blob类文件对象的特性，获取对象的长度。
+            // 外加多重三元运算符。
+            const size = val =>
+              Array.isArray(val)
+                ? val.length
+                : val && typeof val === 'object'
+                ? val.size || val.length || Object.keys(val).length
+                : typeof val === 'string'
+                ? new Blob([val]).size
+                : 0;
+
+            size([1, 2, 3, 4, 5]); // 5
+            size('size'); // 4
+            size({ one: 1, two: 2, three: 3 }); // 3
+          </pre>
+          <h4>22. <code>escapeHTML</code>：转义HTML</h4>
+          <pre class="language-javscript">
+            // 用来防XSS攻击啦。
+            const escapeHTML = str =>
+              str.replace(
+                /[&<>'"]/g,
+                tag =>
+                  ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                  }[tag] || tag)
+              );
+
+            escapeHTML('<a href="#">Me & you</a>'); // '&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;'
+          </pre>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/libs/jquery.syntaxhighlighter.js"></script>
+  <script src="../js/libs/sdmenu.js"></script>
+  <script>
+    window.onload = function () {
+      jMenu = new SDMenu("J_menu");
+      jMenu.init();
+    }
+    $(function () {
+      $.SyntaxHighlighter.init();
+    })
+  </script>
+</body>
+
+</html>
