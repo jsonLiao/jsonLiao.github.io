@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>事件模型</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link href="../css/doc.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrapper article-box">
+    <h3>DOM0级事件模型</h3>
+    <blockquote>
+      <pre>document.getElementById('oBtn').onclick = function(event){}</pre>
+    </blockquote>
+    <h3>DOM2级事件模型</h3>
+    <blockquote>
+      <pre>document.getElementById('oBtn').addEventListener('click', function(){})</pre>
+      <ul class="arclist">
+        <li>事件流的三个阶段
+          <ol class="numlist">
+            <li>事件捕获阶段。</li>
+            <li>处于目标阶段。</li>
+            <li>事件冒泡阶段。</li>
+          </ol>
+        </li>
+        <li>事件捕获和事件冒泡（capture,bubble)</li>
+        <li>事件冒泡与事件捕获相反</li>
+      </ul>
+      <img src="../images/event-flow.jpg" style="width: 500px; height: auto;" alt="" srcset="">
+      <ul class="arclist">
+        <li>demos</li>
+      </ul>
+      <pre class="languange-javscript">
+      let ev = document.getElementById('ev');
+
+      // 事件捕获 true
+      // 事件冒泡 false
+      ev.addEventListener('click', function (e) {
+        console.log('ev captrue');
+      }, true);
+
+      window.addEventListener('click', function (e) {
+        console.log('window captrue');
+      }, true);
+
+      document.addEventListener('click', function (e) {
+        console.log('document captrue');
+      }, true);
+
+      document.documentElement.addEventListener('click', function (e) {
+        console.log('html captrue');
+      }, true);
+
+      document.body.addEventListener('click', function (e) {
+        console.log('body captrue');
+      }, true);
+    </pre>
+    </blockquote>
+
+    <h3>DOM3级事件模型</h3>
+    <blockquote>
+      <ul class="arclist">
+        <li>在DOM2的基础上, 增加了更多的事件</li>
+      </ul>
+      <pre>document.getElementById('oBtn').addEventListener('keyup', function(){})</pre>
+    </blockquote>
+
+    <h3>自定义事件</h3>
+    <blockquote>
+      <ul class="arclist">
+        <li>demos</li>
+      </ul>
+      <pre class="languange-javscript">
+        let eve = new Event('test');
+        let ev = document.getElementById('ev');
+        ev.addEventListener('test', function () {
+          console.log('test dispatch');
+        });
+        setTimeout(function () {
+          ev.dispatchEvent(eve);
+        }, 3000);
+      </pre>
+    </blockquote>
+    <div id="ev"></div>
+  </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/libs/jquery.syntaxhighlighter.js"></script>
+<script src="../js/libs/sdmenu.js"></script>
+<script>
+  $(function () {
+    $.SyntaxHighlighter.init();
+  })
+</script>
+<script type="text/javascript">
+  var ev = document.getElementById('ev');
+
+  ev.addEventListener('click', function (e) {
+    console.log('ev captrue');
+  }, true);
+
+  window.addEventListener('click', function (e) {
+    console.log('window captrue');
+  }, true);
+
+  document.addEventListener('click', function (e) {
+    console.log('document captrue');
+  }, true);
+
+  document.documentElement.addEventListener('click', function (e) {
+    console.log('html captrue');
+  }, true);
+
+  document.body.addEventListener('click', function (e) {
+    console.log('body captrue');
+  }, true);
+
+  var eve = new Event('test');
+  ev.addEventListener('test', function () {
+    console.log('test dispatch');
+  });
+  setTimeout(function () {
+    ev.dispatchEvent(eve);
+  }, 1000);
+</script>
+
+</html>

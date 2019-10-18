@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name='author' content='' />
+  <title>iframe自适应加载的页面高度</title>
+</head>
+
+<body>
+
+  <iframe id="box" src="child.html" frameborder="0" scrolling="no" name="aa"></iframe>
+
+  
+  <script src="jquery.js"></script>
+  <script>
+    $(function(){
+       var tags = $(document.getElementById('box').contentWindow.document.body).innerHeight();
+       console.log(tags)
+    })
+   
+  </script>
+</body>
+
+</html>

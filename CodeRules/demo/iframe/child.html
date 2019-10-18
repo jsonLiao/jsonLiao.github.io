@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta  name='author'  content='' />
+    <title>iframe  自适应其加载的网页(多浏览器兼容)</title>
+    <script type="text/javascript">
+    <!--
+    function iframeAutoFit()
+    {
+        var ex;
+        try
+        {
+            if(window!=parent)
+            {
+                var a = parent.document.getElementsByTagName("IFRAME");
+                for(var i=0; i<a.length; i++) //author:meizz
+                {
+                    if(a[i].contentWindow==window)
+                    {
+                        var h1=0, h2=0;
+                        if(document.documentElement&&document.documentElement.scrollHeight)
+                        {
+                            h1=document.documentElement.scrollHeight;
+                        }
+                        if(document.body) h2=document.body.scrollHeight;
+
+                        var h=Math.max(h1, h2);
+                        if(document.all) {h += 4;}
+                        if(window.opera) {h += 1;}
+                        a[i].style.height = h +"px";
+                    }
+                }
+            }
+        }
+        catch (ex){}
+    }
+    if(document.attachEvent)
+    {
+        window.attachEvent("onload",  iframeAutoFit);
+        window.attachEvent("onresize",  iframeAutoFit);
+    }
+    else
+    {
+        window.addEventListener('load',  iframeAutoFit,  false);
+        window.addEventListener('resize',  iframeAutoFit,  false);
+    }
+    //-->
+    </script>
+    </head>
+    <body>
+    <table border="1" width="200" style="background-color: yellow">
+      <tr>
+        <td>iframe  自适应其加载的网页(多浏览器兼容，支持XHTML)</td>
+      </tr>
+      <tr>
+        <td>iframe  自适应其加载的网页(多浏览器兼容，支持XHTML)</td>
+      </tr>
+      <tr>
+        <td>iframe  自适应其加载的网页(多浏览器兼容，支持XHTML)</td>
+      </tr>
+      <tr>
+        <td>iframe  自适应其加载的网页(多浏览器兼容，支持XHTML)</td>
+      </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>平滑滚动至顶部</title>
+</head>
+<body>
+  <div class="box" style="height: 2000px">
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+    <p>平滑滚动至顶部</p>
+  </div>
+
+  <div id="btn" style="position:fixed; right: 50px; bottom: 50px; border: 1px solid #444; text-align: center; width: 50px; height:50px; font-size: 16px;">返回<br>顶部</div>
+
+  <script>
+  const scrollToTop = () => {
+    const c = document.documentElement.scrollTop || document.body.scrollTop;
+    if(c > 0){
+      window.requestAnimationFrame(scrollToTop);
+      window.scrollTo(0, c - c / 8);
+    }
+  };
+
+  document.querySelector("#btn").addEventListener("click", function(){
+    scrollToTop();
+  });
+  </script>
+</body>
+</html>
