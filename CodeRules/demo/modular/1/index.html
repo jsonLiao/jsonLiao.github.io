@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="../../../css/doc.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/shCore.css">
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    h1.title {
+      font-size: 40px;
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px dashed #aaa;
+      margin-bottom: 40px;
+    }
+
+    h3 {
+      margin: 2em;
+    }
+
+    blockquote {
+      background-color: #f5f2f0;
+      padding: 1em;
+      margin: 2em 2em;
+      border-radius: 1em;
+      border-width: .3em;
+      border-color: #e0dfcc;
+      border-style: solid;
+      text-shadow: 0 1px white;
+      overflow: auto;
+    }
+
+    .arclist {
+      margin-left: 2em;
+    }
+
+    .arclist li {
+      line-height: 2em;
+    }
+
+    h4 {
+      margin: 0 2em;
+    }
+
+    .box {
+      width: 200px;
+      border: 2px solid #000;
+      padding: 1em 0.5em;
+      display: flex;
+    }
+
+    .box-item {
+      float: left;
+      margin-top: 0.5em;
+      margin-left: 1em;
+    }
+
+    .box .item {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      background: red;
+    }
+
+    .wrapper {
+      padding: 0 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1 class="title">modular</h1>
+    <div id="J_menu" class="sdmenu">
+      <div class="list">
+        <span class="tit">1、全局function模式</span>
+        <section class="con">
+          <ul>
+            <li>html</li>
+          </ul>
+          <pre class="code language-html">
+            &lt;body&gt;
+              &lt;script type="text/javascript" src="module1.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript" src="module2.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript"&gt;
+                foo()
+                bar()
+              &lt;/script&gt;
+            &lt;/body&gt;
+          </pre>
+          <ul>
+            <li>module1.js</li>
+          </ul>
+          <pre class="code language-javascript">
+             /**
+              * 全局函数模式: 将不同的功能封装成不同的全局函数
+              * 问题: Global被污染了, 很容易引起命名冲突
+              */
+              let data = 'modules 111';
+              function foo() {
+                console.log('foo()')
+              }
+              function bar() {
+                console.log('bar()')
+              }
+           </pre>
+          <ul>
+            <li>module2.js</li>
+          </ul>
+          <pre class="code language-javascript">
+             let data2 = 'modules 222'
+
+             function foo() { //与另一个模块中的函数冲突了
+                console.log(`foo() ${data2}`)
+             }
+           </pre>
+        </section>
+      </div>
+      <div class="list">
+        <span class="tit">2、namespace模式</span>
+        <section class="con">
+          <ul>
+            <li>html</li>
+          </ul>
+          <pre class="code language-html">
+            &lt;body&gt;
+              &lt;script type="text/javascript" src="module1.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript" src="module2.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript"&gt;
+                Module1.foo()
+                Module1.bar()
+
+                Module2.foo()
+                Module2.bar()
+
+                Module1.data = 'Module1 3333' //能直接修改模块内部的数据
+                Module1.foo()
+              &lt;/script&gt;
+            &lt;/body&gt;
+          </pre>
+          <ul>
+            <li>module1.js</li>
+          </ul>
+          <pre class="code language-javascript">
+             /**
+              * namespace模式: 简单对象封装
+              * 作用: 减少了全局变量
+              * 问题: 不安全(数据不是私有的, 外部可以直接修改)
+              */
+              let Module1 = {
+                data: 'modules 111',
+                foo(){
+                  console.log(`foo() $(this.data)`);
+                },
+                bar(){
+                  console.log(`bar() ${this.data}`);
+                }
+              }
+           </pre>
+          <ul>
+            <li>module2.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            let Module2 = {
+              data: 'modules 222',
+              foo() {
+                console.log(`foo() $(this.data)`);
+              },
+              bar() {
+                console.log(`bar() ${this.data}`);
+              }
+            }
+          </pre>
+        </section>
+      </div>
+      <div class="list">
+        <span class="tit">3、IIFE模式</span>
+        <section class="con">
+          <ul>
+            <li>html</li>
+          </ul>
+          <pre class="code language-html">
+            &lt;body&gt;
+              &lt;script type="text/javascript" src="module1.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript" src="module2.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript"&gt;
+                 myModule.foo()
+                 myModule.bar()
+                 console.log(myModule.data) //undefined 不能访问模块内部数据
+                 myModule.data = 'xxxx' //不是修改的模块内部的data
+                 myModule.foo() //没有改变
+              &lt;/script&gt;
+            &lt;/body&gt;
+          </pre>
+          <ul>
+            <li>module3.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            /**
+              * IIFE模式: 匿名函数自调用(闭包)
+              * IIFE : immediately-invoked function expression(立即调用函数表达式)
+              * 作用: 数据是私有的, 外部只能通过暴露的方法操作
+              * 问题: 如果当前这个模块依赖另一个模块怎么办?
+              */
+            ;(function(window) {
+              let data = 'module3 333'
+              //操作数据的函数
+              function foo() {
+                //用于暴露有函数
+                console.log(`foo() ${data}`)
+              }
+              function bar() {
+                //用于暴露有函数
+                console.log(`bar() ${data}`)
+                otherFun() //内部调用
+              }
+              function otherFun() {
+                //内部私有的函数
+                console.log('otherFun()')
+              }
+              //暴露行为
+              window.myModule = { foo, bar }
+            })(window)
+           </pre>
+        </section>
+      </div>
+      <div class="list">
+        <span class="tit">4、IIFE模式增强</span>
+        <section class="con">
+          <ul>
+            <li>html</li>
+          </ul>
+          <pre class="code language-html">
+            &lt;body&gt;
+              &lt;script type="text/javascript" src="jquery.min.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript" src="module4.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript"&gt;
+                 myModule.foo()
+              &lt;/script&gt;
+            &lt;/body&gt;
+          </pre>
+          <ul>
+            <li>module4.js</li>
+          </ul>
+          <pre class="code language-javascript">
+          /**
+            * IIFE模式增强 : 引入依赖
+            * 这就是现代模块实现的基石
+            */
+            ;(function (window, $) {
+              //数据
+              let data = 'www.baidu.com'
+              //操作数据的函数
+              function foo() {
+                //用于暴露有函数
+                console.log(`foo() ${data}`)
+                $('body').css('background', 'red')
+              }
+
+              function bar() {
+                //用于暴露有函数
+                console.log(`bar() ${data}`)
+                otherFun() //内部调用
+              }
+
+              function otherFun() {
+                //内部私有的函数
+                console.log('otherFun()')
+              }
+              //暴露行为
+              window.myModule = {
+                foo,
+                bar
+              }
+            })(window, jQuery)
+           </pre>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="../../../js/jquery.min.js"></script>
+  <script src="../../../js/libs/jquery.syntaxhighlighter.js"></script>
+  <script src="../../../js/libs/sdmenu.js"></script>
+  <script>
+    window.onload = function () {
+      jMenu = new SDMenu("J_menu");
+      jMenu.init();
+    }
+    $(function () {
+      $.SyntaxHighlighter.init();
+    })
+  </script>
+</body>
+
+</html>
