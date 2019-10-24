@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CommonJS-Node</title>
+  <link href="../../../css/doc.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/shCore.css">
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    h1.title {
+      font-size: 40px;
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px dashed #aaa;
+      margin-bottom: 40px;
+    }
+
+    h3 {
+      margin: 2em;
+    }
+
+    blockquote {
+      background-color: #f5f2f0;
+      padding: 1em;
+      margin: 2em 2em;
+      border-radius: 1em;
+      border-width: .3em;
+      border-color: #e0dfcc;
+      border-style: solid;
+      text-shadow: 0 1px white;
+      overflow: auto;
+    }
+
+    .arclist {
+      margin-left: 2em;
+    }
+
+    .arclist li {
+      line-height: 2em;
+    }
+
+    h4 {
+      margin: 0 2em;
+    }
+
+    .box {
+      width: 200px;
+      border: 2px solid #000;
+      padding: 1em 0.5em;
+      display: flex;
+    }
+
+    .box-item {
+      float: left;
+      margin-top: 0.5em;
+      margin-left: 1em;
+    }
+
+    .box .item {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      background: red;
+    }
+
+    .wrapper {
+      padding: 0 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1 class="title">CommonJS-Node</h1>
+    <div id="J_menu" class="sdmenu">
+      <div class="list">
+        <section class="con" style="display: block;">
+          <ul>
+            <li>app.js</li>
+          </ul>
+          <pre class="code language-javascript">
+             /**
+              * 1. 定义暴露模块:
+              *  module.exports = value;
+              *  exports.xxx = value;
+              * 2. 引入模块:
+              *  var module = require(模块名或模块路径);
+              */
+              "use strict"
+              //引用模块
+              let module1 = require('./modules/module1')
+              let module2 = require('./modules/module2')
+              let module3 = require('./modules/module3')
+
+              let uniq = require('uniq')
+              let fs = require('fs')
+
+              //使用模块
+              module1.foo()
+              module2()
+              module3.foo()
+              module3.bar()
+
+              console.log(uniq([1, 3, 1, 4, 3]))
+
+              fs.readFile('app.js', function (error, data) {
+                console.log(data.toString())
+              })
+           </pre>
+          <ul>
+            <li>module1.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            /**
+            * 使用module.exports = value向外暴露一个对象
+            */
+            "use strict"
+            module.exports = {
+              foo() {
+                console.log('moudle1 foo()')
+              }
+            }
+          </pre>
+          <ul>
+            <li>module2.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            /**
+            * 使用module.exports = value 向外暴露一个函数
+            */
+            "use strict"
+            module.exports = function () {
+              console.log('module2()')
+            }
+          </pre>
+          <ul>
+            <li>module3.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            /**
+            * 使用exports.xxx = value 向外暴露一个对象
+            */
+            "use strict"
+            exports.foo = function () {
+              console.log('module3 foo()')
+            }
+
+            exports.bar = function () {
+              console.log('module3 bar()')
+            }
+          </pre>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="../../../js/jquery.min.js"></script>
+  <script src="../../../js/libs/jquery.syntaxhighlighter.js"></script>
+  <script>
+    $(function () {
+      $.SyntaxHighlighter.init();
+    })
+  </script>
+</body>
+
+</html>

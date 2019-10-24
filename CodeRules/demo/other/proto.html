@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>原型链</title>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      /** 
+      *  创建对象三种方式 
+      */
+      // 第一种方式：字面量
+      let obj1 = {name: "obj1"};
+      let obj2 = new Object({name: 'obj2'});
+
+      // 第二种方式：构造函数
+      let Fn = function(name) {
+        this.name = name;
+      }
+      let obj3 = new Fn("obj3");
+
+      //第三种方式： Object.create
+      let child = { name: 'obj4'};
+      let obj4 = Object.create(child);
+
+
+      //函数原型链上添加方法
+      Fn.prototype.sayName = function(){
+        console.log("your Name is " + this.name);
+      }
+
+      // 新的对象-多个对象继承同一个函数原型链上的方法和属性
+      let obj5 = new Fn('obj5');
+
+      // 自定义new || new的原理
+      let oNew = function(fun){
+        let o = Object.create(fun.prototype);
+        let n = fun.call(o);
+        if(typeof n === 'object'){
+          return n;
+        }else{
+          return o;
+        }
+      }
+      let obj6 = oNew(Fn);
+      obj6.name = "obj6";
+    </script>
+  </body>
+</html>
