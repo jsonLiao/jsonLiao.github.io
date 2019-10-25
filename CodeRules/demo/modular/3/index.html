@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CommonJS-Browserify</title>
+  <link href="../../../css/doc.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/shCore.css">
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    h1.title {
+      font-size: 40px;
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px dashed #aaa;
+      margin-bottom: 40px;
+    }
+
+    h3 {
+      margin: 2em;
+    }
+
+    blockquote {
+      background-color: #f5f2f0;
+      padding: 1em;
+      margin: 2em 2em;
+      border-radius: 1em;
+      border-width: .3em;
+      border-color: #e0dfcc;
+      border-style: solid;
+      text-shadow: 0 1px white;
+      overflow: auto;
+    }
+
+    .arclist {
+      margin-left: 2em;
+    }
+
+    .arclist li {
+      line-height: 2em;
+    }
+    .wrapper {
+      padding: 0 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1 class="title">CommonJS-Browserify</h1>
+    <div id="J_menu" class="sdmenu">
+      <div class="list">
+        <section class="con" style="display: block;">
+          <h2 class="mb20">CommonJS-Browserify模块化使用</h2>
+          <ul>
+            <li>创建项目结构</li>
+          </ul>
+          <pre class="code language-javascript">
+            |-js
+              |-dist //打包生成文件的目录
+              |-src //源码所在的目录
+                |-module1.js
+                |-module2.js
+                |-module3.js
+            |-app.js //应用主源文件
+            |-index.html
+
+            |-package.json
+            {
+              "name": "commonjs-browserify",
+              "version": "1.0.0",
+              "dependencies": {
+                "uniq": "^1.0.1"
+              }
+            }
+           </pre>
+          <ul>
+            <li>下载browserify</li>
+          </ul>
+          <pre class="code language-javascript">
+            //全局: npm|cnpm i -g browserify
+            //局部: npm|cnpm i -D browserify
+          </pre>
+          <ul>
+            <li>module1.js</li>
+          </ul>
+          <pre class="code language-javascript">
+           /**
+            * 使用module.exports = value向外暴露一个对象
+            */
+            module.exports = {
+              foo() {
+                console.log('moudle1 foo()')
+              }
+            }
+          </pre>
+          <ul>
+            <li>module2.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            /**
+            * 使用module.exports = value 向外暴露一个函数
+            */
+            "use strict"
+            module.exports = function () {
+              console.log('module2()')
+            }
+          </pre>
+          <ul>
+            <li>module3.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            /**
+            * 使用exports.xxx = value 向外暴露一个对象
+            */
+            "use strict"
+            exports.foo = function () {
+              console.log('module3 foo()')
+            }
+
+            exports.bar = function () {
+              console.log('module3 bar()')
+            }
+          </pre>
+          <ul>
+            <li>app.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            /**
+             * 1. 定义暴露模块:
+             *   module.exports = value;
+             *   exports.xxx = value;
+             * 2. 引入模块:
+             *   var module = require(模块名或模块路径);
+            */
+            //引用模块
+            let module1 = require('./module1')
+            let module2 = require('./module2')
+            let module3 = require('./module3')
+
+            let uniq = require('uniq')
+
+            //使用模块
+            module1.foo()
+            module2()
+            module3.foo()
+            module3.bar()
+          
+            console.log(uniq([1, 3, 1, 4, 3]))
+          </pre>
+          <ul>
+            <li>打包命令</li>
+          </ul>
+          <pre class="code language-javascript">
+             browserify js/src/app.js -o js/dist/bundle.js
+          </pre>
+          <div class="mb20"></div>
+          <img src="https://raw.githubusercontent.com/browserify/browserify/HEAD/assets/browserify.png"
+            alt="browserify!">
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="../../../js/jquery.min.js"></script>
+  <script src="../../../js/libs/jquery.syntaxhighlighter.js"></script>
+  <script>
+    $(function () {
+      $.SyntaxHighlighter.init();
+    })
+  </script>
+</body>
+
+</html>
