@@ -1,0 +1,15 @@
+{
+  "name": "es6-babel-browserify",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run buildFive && npm run buildMerge",
+    "buildFive": "babel js/src -d js/lib",
+    "buildMerge": "browserify js/lib/app.js -o js/lib/bundle.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "browserify": "^16.5.0"
+  }
+}

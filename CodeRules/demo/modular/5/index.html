@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CMD-SeaJS</title>
+  <link href="../../../css/doc.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/shCore.css">
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    h1.title {
+      font-size: 40px;
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px dashed #aaa;
+      margin-bottom: 40px;
+    }
+
+    .wrapper {
+      padding: 0 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1 class="title">CMD-SeaJS</h1>
+    <div id="J_menu" class="sdmenu">
+      <div class="list">
+        <section class="con article-content" style="display: block;">
+          <h2 class="mb20">使用seajs步骤</h2>
+          <ul class="mb20">
+            <li>引入sea.js库</li>
+            <li>如何定义导出模块
+              <ul>
+                <li>define()</li>
+                <li>exports</li>
+                <li>module.exports</li>
+              </ul>
+            </li>
+            <li>如何依赖模块
+              <ul>
+                <li>require()</li>
+              </ul>
+            </li>
+            <li>如何使用模块
+              <ul>
+                <li>seajs.use()</li>
+              </ul>
+            </li>
+          </ul>
+          <h2 class="mb20">seajs实例</h2>
+          <ul>
+            <li>html</li>
+          </ul>
+          <pre class="code language-html">
+            &lt;body&gt;
+              &lt;script type="text/javascript" src="js/libs/sea.js"&gt;&lt;/script&gt;
+              &lt;script type="text/javascript"&gt;
+                 seajs.use('./js/modules/main')
+              &lt;/script&gt;
+            &lt;/body&gt;
+          </pre>
+          <ul>
+            <li>main.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            define(function (require) {
+              var m1 = require('./module1')
+              var m4 = require('./module4')
+              m1.show()
+              m4.show()
+            })
+          </pre>
+          <ul>
+            <li>module1.js</li>
+          </ul>
+          <pre class="code language-javascript">
+          define(function (require, exports, module) {
+            //内部变量数据
+            var data = 'atguigu.com'
+            //内部函数
+            function show() {
+              console.log('module1 show() ' + data)
+            }
+
+            //向外暴露
+            exports.show = show
+          })
+          </pre>
+          <ul>
+            <li>module2.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            define(function (require, exports, module) {
+              module.exports = {
+                msg: 'I Will Back'
+              }
+            })
+          </pre>
+          <ul>
+            <li>module3.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            define(function(require, exports, module) {
+              const API_KEY = 'amiKing'
+              exports.API_KEY = API_KEY
+            })
+          </pre>
+          <ul>
+            <li>module4.js</li>
+          </ul>
+          <pre class="code language-javascript">
+            define(function (require, exports, module) {
+              //引入依赖模块(同步)
+              var module2 = require('./module2')
+
+              function show() {
+                console.log('module4 show() ' + module2.msg)
+              }
+
+              exports.show = show
+              //引入依赖模块(异步)
+              require.async('./module3', function (m3) {
+                console.log('异步引入依赖模块3 ' + m3.API_KEY)
+              })
+            })
+          </pre>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="../../../js/jquery.min.js"></script>
+  <script src="../../../js/libs/jquery.syntaxhighlighter.js"></script>
+  <script>
+    $(function () {
+      $.SyntaxHighlighter.init();
+    })
+  </script>
+</body>
+
+</html>

@@ -2,9 +2,9 @@
 define(['dataService', 'jquery'], function(dataService, $) {
   let name = 'Tom'
   function showMsg() {
-    alert(dataService.getMsg() + ', ' + name)
+    console.log(dataService.getMsg() + ', ' + name)
   }
-  $('body').css('background', 'green')
+  $('body').append('<h1>Hello amiKing</h1>')
   // 暴露模块
   return { showMsg }
 })
