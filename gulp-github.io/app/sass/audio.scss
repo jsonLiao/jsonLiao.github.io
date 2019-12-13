@@ -1,0 +1,54 @@
+.audio {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 9999;
+  width: 40px;
+  height: 40px;
+
+  &.off {
+    background: url("../images/music.svg") no-repeat;
+    background-size: contain;
+  }
+
+  .none {
+    display: none;
+  }
+
+  &.rotate {
+    -webkit-animation: rotating 1.2s linear infinite;
+    -moz-animation: rotating 1.2s linear infinite;
+    -o-animation: rotating 1.2s linear infinite;
+    animation: rotating 1.2s linear infinite;
+  }
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rotating {
+  from {
+    -moz-transform: rotate(0);
+  }
+
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

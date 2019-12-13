@@ -1,0 +1,13 @@
+.item-3 .container {
+    height: 100%;
+    display: none;
+    position: relative;
+
+    .tag-canvas {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

@@ -1,0 +1,106 @@
+@import "loading.scss";
+@import "page-1.scss";
+@import "page-2.scss";
+@import "page-3.scss";
+@import "page-4.scss";
+@import "page-5.scss";
+@import "page-6.scss";
+@import "background.scss";
+@import "movement.scss";
+@import "audio.scss";
+
+.resume-hide {
+	display: none;
+}
+
+.section {
+	text-align: center;
+	font: 50px "Microsoft Yahei";
+	color: #fff;
+}
+
+/**********************导航条**********************************/
+.resume {
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 10;
+	border: none;
+}
+
+.navbar {
+	background: none;
+	transition: 1s all ease;
+
+	&.active {
+		background: rgba(0, 0, 0, .6);
+	}
+}
+
+.resume .navbar-brand{
+	position: relative;
+	display: block;
+	width: 144px;
+	height: 50px;
+	background: url(../images/logo.png) center center no-repeat;
+	background-size: 90%;
+	overflow: hidden;
+	&::before{
+		content: '';
+		position: absolute;
+		left: -50px;
+		top: 50%;
+		margin-top: -15px;
+		width: 30px;
+		height: 30px;
+		background: linear-gradient(to right, transparent, rgba(255, 255, 255, .5), transparent);
+		transform: skewx(-25deg);
+		-o-transform: skewx(-25deg);
+		-moz-transform: skewx(-25deg);
+		-webkit-transform: skewx(-25deg);
+		transition: left 1s ease 0s;
+		animation: logoMove 2s linear infinite;
+		-webkit-animation: logoMove 2s linear infinite;
+		border-radius: 50%;
+	}
+}
+
+.resume .navbar-right li a,
+.resume .navbar-right li a:visited {
+	color: #ffffff !important;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.resume .navbar-right li a:hover {
+	color: #ffffff !important;
+	text-decoration: none;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+	background: none;
+}
+
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:visited,
+.navbar-default .navbar-nav>.active>a:focus {
+	color: #ffffff;
+	background-color: #000;
+	text-decoration: none;
+}
+
+.navbar-default .navbar-toggle {
+	background-color: #122b40;
+}
+
+.navbar-default .navbar-toggle:focus {
+	background-color: #999;
+}
+
+.navbar-default .navbar-toggle:hover {
+	background-color: #122b40;
+}
+
+
+/********************导航条End***************************************/
