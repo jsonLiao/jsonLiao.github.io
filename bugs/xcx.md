@@ -28,3 +28,41 @@
    在点击取消授权的时候，需要奖授权状态更改过来，
 
 7. ......
+
+
+
+
+others----------------
+
+1.slot
+
+不能用slot-scope
+slot的内容会作为组件根元素的兄弟插入，不按你写的层级渲染
+2.scroll-view
+
+height必须要有值,若用flex布局动态改变scroll-view的高度，事件不会触发。
+编辑器内快速滑动 不触发 scrolltolower
+3.wx:if
+
+可以用它控制 live-player live-pusher 的层级
+4.page.json
+
+“backgroundColor”: “#ff0000” ，即使页面为空也是下拉才能看见颜色
+5.wxss
+
+不能使用本地图片
+6.image
+
+设置属性mode="widthFix"样式width: 100%; display: block;高度自动撑开
+7.button按钮 open-type=“getUserInfo”
+
+授权过一次后，偶尔不弹窗，但会进入授权回调的方法，删掉小程序后再进入还是会弹的
+8.设置 navigationBarTitleText 无效
+
+一种可能是页面路径没有放在page.json里面
+9.在组件中使用 this.createSelectorQuery()而非 wx.createSelectorQuery()
+
+10.lottie配置信息中animationData的值注意是相对路径，require不支持绝对路径，部分android机型会导致闪退
+11.cover-view或里面的button不支持渐变色
+
+
