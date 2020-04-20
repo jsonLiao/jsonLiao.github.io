@@ -1,0 +1,172 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>reduce</title>
+  <link href="../../css/doc.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/shCore.css">
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout article div {
+      min-height: 200px;
+    }
+
+    h1.title {
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px dashed #aaa;
+    }
+
+    h3 {
+      margin: 2em;
+    }
+
+    blockquote {
+      background-color: #f5f2f0;
+      padding: 1em;
+      margin: 2em 2em;
+      border-radius: 1em;
+      border-width: .3em;
+      border-color: #e0dfcc;
+      border-style: solid;
+      text-shadow: 0 1px white;
+      overflow: auto;
+    }
+
+    .arclist {
+      margin-left: 2em;
+    }
+
+    .arclist li {
+      line-height: 2em;
+    }
+
+    h4 {
+      margin: 0 2em;
+    }
+
+    .box {
+      width: 200px;
+      border: 2px solid #000;
+      padding: 1em 0.5em;
+      display: flex;
+    }
+
+    .box-item {
+      float: left;
+      margin-top: 0.5em;
+      margin-left: 1em;
+    }
+
+    .box .item {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="title">reduce</h1>
+  <h3>1、简单应用</h3>
+  <pre class="language-javscript">
+    let arr = [1, 2, 3, 4, 5]
+    console.log(arr.reduce((a, b) => a + b)) //15
+    console.log(arr.reduce((a, b) => a * b)) //120
+  </pre>
+  <h3>2、计算数组中每个元素出现的次数</h3>
+  <pre class="language-javscript">
+    let arr2 = ['name', 'age', 'long', 'short', 'long', 'name', 'name']
+    let arrResult = arr2.reduce((pre, cur) => {
+        console.log(pre, cur)
+        if (cur in pre) {
+            pre[cur]++
+        } else {
+            pre[cur] = 1
+        }
+        return pre
+    }, {})
+    console.log(arrResult) //结果：{name: 3, age: 1, long: 2, short: 1}
+  </pre>
+  <h3>3、数组去重</h3>
+  <pre class="language-javscript">
+    let arrResult = arr.reduce((pre, cur) => {
+        if (!pre.includes(cur)) {
+            pre.push(cur)
+        }
+        return pre;
+    }, [])
+    console.log(arrResult) //结果：["name", "age", "long", "short"]
+  </pre>
+  <h3>4、对象属性求和</h3>
+  <pre class="language-javscript">
+    let person = [{
+        name: 'xiaoming',
+        age: 18
+    }, {
+        name: 'xiaohong',
+        age: 17
+    }, {
+        name: 'xiaogang',
+        age: 19
+    }]
+    let result = person.reduce((a, b) => {
+        a = a + b.age;
+        return a;
+    }, 0)
+    console.log(result) //结果：54
+  </pre>
+  <h3>4、数组对象属性 根据指定属性去重</h3>
+  <pre class="language-javscript">
+    let newArr = [{
+        name: "张三",
+        form: "aaa"
+    },
+    {
+        name: "小明",
+        form: "bbb"
+    },
+    {
+        name: "小王",
+        form: "ccc"
+    }, {
+        name: "小李",
+        form: "ddd"
+    }, {
+        name: "小刘",
+        form: "eee"
+    }, {
+        name: "张三",
+        form: "aaa"
+    }
+  ]
+  let orr = [];
+  let result = newArr.reduce((pre, cur) => {
+    if (!orr.includes(cur.form)) {
+        pre.push(cur)
+        orr.push(cur.form)
+    }
+    return pre
+  }, []);
+  </pre>
+</body>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/libs/jquery.syntaxhighlighter.js"></script>
+<script>
+  $(function () {
+    $.SyntaxHighlighter.init();
+  })
+</script>
+
+</html>
