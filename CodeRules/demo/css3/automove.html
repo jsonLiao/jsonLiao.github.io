@@ -1,0 +1,137 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3-实现左右滚动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .box {
+            box-sizing: border-box;
+            position: relative;
+            width: 375px;
+            height: 76px;
+            line-height: 50px;
+            overflow: hidden;
+            border: 3px solid #000;
+            margin: 30px auto;
+        }
+
+        .border {
+            position: absolute;
+            top: 10px;
+            left: 375px;
+            display: flex;
+            white-space: nowrap;
+            animation: scrollMove 16s 1s both infinite cubic-bezier(0, 0, 1, 1);
+        }
+
+        .border .item {
+            width: 325px;
+            margin-right: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .border .item .img {
+            margin-right: 10px;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            vertical-align: top;
+            background-color: #ccc;
+        }
+
+        @keyframes scrollMove {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-110%);
+            }
+        }
+
+        .moveBox {
+            box-sizing: border-box;
+            position: relative;
+            width: 375px;
+            height: 56px;
+            line-height: 50px;
+            margin: 50px auto;
+            border: 3px solid #f00;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .move {
+            position: absolute;
+            display: flex;
+            top: 0;
+            left: 100%;
+            white-space: nowrap;
+            animation: moves 10s infinite linear normal;
+        }
+
+        .list {
+            margin-right: 300px;
+        }
+
+        @keyframes moves {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="border">
+            <div class="item">
+                <span class="img"></span> jsonliao***1111111
+            </div>
+            <div class="item">
+                <span class="img"></span> jsonliao***1222
+            </div>
+            <div class="item">
+                <span class="img"></span> jsonliao***33333333
+            </div>
+            <div class="item">
+                <span class="img"></span> jsonliao***44444444444
+            </div>
+            <div class="item">
+                <span class="img"></span> jsonliao***555
+            </div>
+            <div class="item">
+                <span class="img"></span> jsonliao***6666666
+            </div>
+        </div>
+    </div>
+
+
+    <div class="moveBox">
+        <div class="move">
+            <div class="list">温馨提示：由于疫情严重，请带好口罩，注意保持距离！！！</div>
+            <div class="list">温馨提示：生活总是会好的，一切都是美好的！！！！！！！！！！！！！！</div>
+        </div>
+    </div>
+</body>
+
+</html>
