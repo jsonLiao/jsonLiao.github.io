@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">  
+    <style type="text/css">
+		.swiper-container {
+		    width: 600px;
+		    height: 300px;
+		}
+		.swiper-slide {
+			width: 500px;
+		    background: #eee;
+		    border-radius: 20px;
+		    text-align: center;
+		}
+		.swiper-slide-active {
+			background: #ccc;
+		}
+    </style>
+</head>
+
+<body>
+	<div class="swiper-container">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide">Slide 1</div>
+	        <div class="swiper-slide">Slide 2</div>
+	        <div class="swiper-slide">Slide 3</div>
+	        <div class="swiper-slide">Slide 4</div>
+	        <div class="swiper-slide">Slide 5</div>
+	    </div>
+	</div>
+
+    <script src="https://unpkg.com/swiper/js/swiper.js"> </script>
+    <script type="text/javascript">
+	  var mySwiper1 = new Swiper ('.swiper-container', {
+	    slidesPerView: 'auto',
+	    loop: false,
+	    watchSlidesProgress: true,
+	    on: {
+		    setTranslate: function() {
+				slides = this.slides;
+				for(i=0; i<slides.length; i++) {
+					slide = slides.eq(i);
+					progress = slides[i].progress;
+				    slide.css({'z-index': 100-i});
+				    slide.transform('');
+				    scale = 1 - Math.abs(progress) / 8;
+				    slide.transform('translate3d(-'+ Math.abs(progress)*410 +'px, 0, 0) scale(' + scale + ')');
+				}
+			},
+			setTransition: function(transition) {
+				for (var i=0; i<this.slides.length; i++) {
+					var slide = this.slides.eq(i);
+					slide.transition(transition);
+				}
+			}
+	    }
+	  })
+	  mySwiper1.update();
+    </script>
+</body>
+</html>
